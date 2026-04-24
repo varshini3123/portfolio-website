@@ -90,7 +90,7 @@
       position: relative;
       flex-shrink: 0;
       width: 150px;
-      height: 150px;
+      height: 170px;
       animation: profile-float 5s ease-in-out infinite;
     }
 
@@ -135,7 +135,7 @@
     }
 
     .profile-image-inner {
-      position: relative;
+      position: fixed;
       width: 100%;
       height: 100%;
       border-radius: 50%;
@@ -147,8 +147,8 @@
 
     .profile-image-inner img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: 120%;
+      object-fit: fill;
       object-position: center top;
       display: block;
       transition: transform 0.4s ease;
@@ -596,7 +596,7 @@
         <div class="profile-image-wrapper">
           <div class="profile-image-inner">
             <img
-              src="images/profile.jpg"
+              src="https://cdn.corenexis.com/files/c/5569713720.jpg"
               alt="Varshini P — UI/UX Designer & Frontend Developer"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
             >
@@ -775,7 +775,7 @@
           <div class="experience-tags">
             <span class="experience-tag">Canva</span><span class="experience-tag">Graphic Design</span><span class="experience-tag">Branding</span><span class="experience-tag">Corporate Design</span>
           </div>
-          <a href="https://docs.google.com/gview?url=https://raw.githubusercontent.com/varshini3123/al-ihsan-ui-design/main/AL_IHSAN_Company_Profile.pdf" target="_blank" class="experience-link">View Project →</a>
+          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" class="experience-link">View Project →</a>
         </div>
       </div>
       <div class="timeline-item">
@@ -803,96 +803,358 @@
 
       <!-- Project 1 -->
       <div class="project-card">
-        <div class="project-image">
-          <!-- Replace src with "images/project1.jpg" -->
-          <img src="images/project1.jpg" alt="Amazon-Inspired E-commerce Interface"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-image-placeholder" style="display:none;">🛒</div>
+        <div class="project-image proj-bg-1">
+          <!-- Professional SVG illustration for e-commerce -->
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="pg1a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6366f1" stop-opacity=".6"/>
+                <stop offset="100%" stop-color="#ec4899" stop-opacity=".4"/>
+              </linearGradient>
+              <linearGradient id="pg1b" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#22d3ee" stop-opacity=".5"/>
+                <stop offset="100%" stop-color="#6366f1" stop-opacity=".3"/>
+              </linearGradient>
+            </defs>
+            <!-- Nav bar -->
+            <rect x="0" y="0" width="400" height="28" fill="#131326" rx="0"/>
+            <rect x="12" y="8" width="60" height="12" rx="3" fill="#f59e0b" opacity=".9"/>
+            <rect x="82" y="10" width="180" height="8" rx="4" fill="#ffffff" opacity=".12"/>
+            <rect x="270" y="8" width="30" height="12" rx="3" fill="#6366f1" opacity=".7"/>
+            <rect x="308" y="8" width="30" height="12" rx="3" fill="#6366f1" opacity=".5"/>
+            <rect x="346" y="8" width="42" height="12" rx="3" fill="#ec4899" opacity=".8"/>
+            <!-- Hero banner -->
+            <rect x="0" y="28" width="400" height="60" fill="url(#pg1a)"/>
+            <rect x="14" y="38" width="100" height="12" rx="3" fill="#fff" opacity=".85"/>
+            <rect x="14" y="56" width="70" height="8" rx="3" fill="#fff" opacity=".5"/>
+            <rect x="14" y="68" width="48" height="12" rx="4" fill="#f59e0b"/>
+            <rect x="220" y="30" width="170" height="56" rx="6" fill="#fff" opacity=".06"/>
+            <!-- Products row -->
+            <rect x="0" y="88" width="400" height="112" fill="#0d0d1e"/>
+            <!-- card 1 -->
+            <rect x="12" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
+            <rect x="18" y="104" width="70" height="52" rx="4" fill="url(#pg1b)"/>
+            <rect x="18" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
+            <rect x="18" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
+            <!-- card 2 -->
+            <rect x="102" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
+            <rect x="108" y="104" width="70" height="52" rx="4" fill="#22223a"/>
+            <circle cx="143" cy="130" r="20" fill="#ec4899" opacity=".3"/>
+            <rect x="108" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
+            <rect x="108" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
+            <!-- card 3 -->
+            <rect x="192" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
+            <rect x="198" y="104" width="70" height="52" rx="4" fill="#22223a"/>
+            <rect x="210" y="112" width="46" height="36" rx="3" fill="#6366f1" opacity=".35"/>
+            <rect x="198" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
+            <rect x="198" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
+            <!-- card 4 -->
+            <rect x="282" y="98" width="106" height="92" rx="6" fill="#1a1a2e"/>
+            <rect x="290" y="104" width="90" height="52" rx="4" fill="#22223a"/>
+            <circle cx="335" cy="130" r="22" fill="#22d3ee" opacity=".2"/>
+            <rect x="290" y="162" width="65" height="7" rx="2" fill="#fff" opacity=".6"/>
+            <rect x="290" y="173" width="45" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
+            <!-- shopping cart badge -->
+            <circle cx="370" cy="12" r="8" fill="#ec4899" opacity=".9"/>
+            <text x="370" y="16" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif">3</text>
+          </svg>
           <div class="project-image-overlay"><span>View Project ↗</span></div>
         </div>
         <div class="project-content">
-          <h3 class="project-title">Amazon-Inspired E-commerce Interface</h3>
+          <h3 class="project-title">Amazon-Inspired E-Commerce Interface</h3>
           <p class="project-description">Engineered a visually structured e-commerce web interface replicating real-world online shopping layouts with reusable UI components and responsive styling.</p>
           <div class="project-tags">
             <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span>
           </div>
-          <a href="https://varshini3123.github.io/amazon-clone/" target="_blank" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/amazon-clone/" target="_blank" rel="noopener" class="project-link">View Project →</a>
         </div>
       </div>
 
-      <!-- Project 2 -->
+      <!-- Project 2: Travel & Tourism -->
       <div class="project-card">
-        <div class="project-image">
-          <!-- Replace src with "images/project2.jpg" -->
-          <img src="images/project2.jpg" alt="Travel & Tourism Website"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-image-placeholder" style="display:none;">✈️</div>
+        <div class="project-image proj-bg-2">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="pg2sky" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0a3070"/>
+                <stop offset="100%" stop-color="#1a6080"/>
+              </linearGradient>
+              <linearGradient id="pg2land" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f5040"/>
+                <stop offset="100%" stop-color="#0a2a20"/>
+              </linearGradient>
+            </defs>
+            <!-- Sky -->
+            <rect x="0" y="0" width="400" height="130" fill="url(#pg2sky)"/>
+            <!-- Sun/Moon -->
+            <circle cx="310" cy="40" r="28" fill="#f59e0b" opacity=".5"/>
+            <circle cx="310" cy="40" r="22" fill="#f59e0b" opacity=".7"/>
+            <!-- Stars -->
+            <circle cx="30" cy="20" r="1.5" fill="#fff" opacity=".7"/>
+            <circle cx="80" cy="15" r="1" fill="#fff" opacity=".5"/>
+            <circle cx="150" cy="25" r="1.5" fill="#fff" opacity=".6"/>
+            <circle cx="200" cy="10" r="1" fill="#fff" opacity=".5"/>
+            <circle cx="250" cy="30" r="1.5" fill="#fff" opacity=".4"/>
+            <!-- Mountains -->
+            <polygon points="0,130 80,60 160,130" fill="#0a1a3a" opacity=".9"/>
+            <polygon points="60,130 160,50 260,130" fill="#0d2040" opacity=".85"/>
+            <polygon points="140,130 260,55 380,130" fill="#102548" opacity=".8"/>
+            <!-- Ground -->
+            <rect x="0" y="128" width="400" height="72" fill="url(#pg2land)"/>
+            <!-- Road -->
+            <path d="M180,200 L220,200 L240,130 L160,130 Z" fill="#1a1a2e" opacity=".8"/>
+            <rect x="197" y="140" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="197" y="160" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="197" y="180" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
+            <!-- Nav bar -->
+            <rect x="0" y="0" width="400" height="26" fill="rgba(0,0,0,.55)"/>
+            <rect x="12" y="7" width="50" height="12" rx="3" fill="#22d3ee" opacity=".8"/>
+            <rect x="76" y="9" width="30" height="8" rx="3" fill="#fff" opacity=".4"/>
+            <rect x="114" y="9" width="40" height="8" rx="3" fill="#fff" opacity=".4"/>
+            <rect x="162" y="9" width="48" height="8" rx="3" fill="#fff" opacity=".4"/>
+            <rect x="338" y="7" width="50" height="12" rx="4" fill="#ec4899" opacity=".85"/>
+            <!-- Destination cards -->
+            <rect x="8" y="140" width="80" height="50" rx="6" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+            <rect x="12" y="144" width="72" height="30" rx="4" fill="rgba(34,211,238,.15)"/>
+            <rect x="12" y="178" width="45" height="6" rx="2" fill="#fff" opacity=".5"/>
+            <rect x="100" y="140" width="80" height="50" rx="6" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+            <rect x="104" y="144" width="72" height="30" rx="4" fill="rgba(236,72,153,.15)"/>
+            <rect x="104" y="178" width="45" height="6" rx="2" fill="#fff" opacity=".5"/>
+            <!-- Plane -->
+            <g transform="translate(330,70) rotate(-20)">
+              <polygon points="0,-6 20,0 0,6" fill="#fff" opacity=".85"/>
+              <polygon points="0,-2 -10,-8 -12,-6 0,0" fill="#fff" opacity=".6"/>
+              <polygon points="0,2 -10,8 -12,6 0,0" fill="#fff" opacity=".6"/>
+            </g>
+          </svg>
           <div class="project-image-overlay"><span>View Project ↗</span></div>
         </div>
         <div class="project-content">
-          <h3 class="project-title">Travel & Tourism Website</h3>
+          <h3 class="project-title">Travel &amp; Tourism Website</h3>
           <p class="project-description">Developed a responsive travel and tourism website with structured navigation, destination sections, and basic SEO techniques for improved search visibility.</p>
           <div class="project-tags">
             <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">SEO</span>
           </div>
-          <a href="https://varshini3123.github.io/travel-tourism-frontend/" target="_blank" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/travel-tourism-frontend/" target="_blank" rel="noopener" class="project-link">View Project →</a>
         </div>
       </div>
 
-      <!-- Project 3 -->
+      <!-- Project 3: Traffic Monitoring -->
       <div class="project-card">
-        <div class="project-image">
-          <!-- Replace src with "images/project3.jpg" -->
-          <img src="images/project3.jpg" alt="Intelligent Traffic Monitoring System"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-image-placeholder" style="display:none;">🚗</div>
+        <div class="project-image proj-bg-3">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="pg3road" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1a2a1a"/>
+                <stop offset="100%" stop-color="#0a180a"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="200" fill="#080f08"/>
+            <!-- Road -->
+            <rect x="0" y="90" width="400" height="110" fill="url(#pg3road)"/>
+            <rect x="0" y="90" width="400" height="3" fill="#22d3ee" opacity=".3"/>
+            <!-- Lane markers -->
+            <rect x="0" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="80" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="160" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="240" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="320" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <!-- Buildings bg -->
+            <rect x="0" y="20" width="50" height="70" fill="#111a11" rx="2"/>
+            <rect x="55" y="35" width="35" height="55" fill="#0f180f" rx="2"/>
+            <rect x="95" y="15" width="45" height="75" fill="#121a12" rx="2"/>
+            <rect x="290" y="25" width="40" height="65" fill="#111a11" rx="2"/>
+            <rect x="335" y="10" width="65" height="80" fill="#0f180f" rx="2"/>
+            <!-- Detection boxes on cars -->
+            <!-- Car 1 -->
+            <rect x="40" y="100" width="65" height="35" rx="5" fill="#22d3ee" opacity=".15"/>
+            <rect x="40" y="100" width="65" height="35" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <rect x="48" y="108" width="49" height="19" rx="3" fill="#22d3ee" opacity=".25"/>
+            <!-- Car 2 -->
+            <rect x="155" y="95" width="70" height="38" rx="5" fill="#ec4899" opacity=".15"/>
+            <rect x="155" y="95" width="70" height="38" rx="5" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <rect x="163" y="103" width="54" height="22" rx="3" fill="#ec4899" opacity=".2"/>
+            <!-- Car 3 -->
+            <rect x="270" y="100" width="75" height="36" rx="5" fill="#6366f1" opacity=".15"/>
+            <rect x="270" y="100" width="75" height="36" rx="5" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <rect x="278" y="108" width="59" height="20" rx="3" fill="#6366f1" opacity=".25"/>
+            <!-- Plate recognition label -->
+            <rect x="40" y="136" width="65" height="14" rx="3" fill="#22d3ee" opacity=".9"/>
+            <text x="72" y="147" text-anchor="middle" font-size="8" fill="#000" font-family="monospace" font-weight="bold">TN 38 BX 1234</text>
+            <rect x="155" y="134" width="70" height="14" rx="3" fill="#ec4899" opacity=".9"/>
+            <text x="190" y="145" text-anchor="middle" font-size="8" fill="#fff" font-family="monospace" font-weight="bold">KA 05 MN 7890</text>
+            <!-- HUD panel -->
+            <rect x="4" y="4" width="140" height="70" rx="6" fill="rgba(0,20,0,.75)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".5"/>
+            <text x="12" y="18" font-size="8" fill="#22d3ee" font-family="monospace">TRAFFIC MONITOR v2.0</text>
+            <text x="12" y="30" font-size="7" fill="#8f8" font-family="monospace">● VEHICLES DETECTED: 3</text>
+            <text x="12" y="42" font-size="7" fill="#8f8" font-family="monospace">● PLATES SCANNED: 2/3</text>
+            <text x="12" y="54" font-size="7" fill="#fa0" font-family="monospace">⚠ SPEED: 62 km/h</text>
+            <text x="12" y="66" font-size="7" fill="#8f8" font-family="monospace">● YOLOv9 | OCR ACTIVE</text>
+            <!-- Camera icon top-right -->
+            <rect x="358" y="5" width="36" height="26" rx="4" fill="rgba(99,102,241,.3)" stroke="#6366f1" stroke-width="1"/>
+            <circle cx="376" cy="18" r="7" fill="none" stroke="#6366f1" stroke-width="1.5"/>
+            <circle cx="376" cy="18" r="3" fill="#6366f1" opacity=".7"/>
+            <rect x="362" y="9" width="6" height="4" rx="1" fill="#6366f1" opacity=".5"/>
+          </svg>
           <div class="project-image-overlay"><span>View Project ↗</span></div>
         </div>
         <div class="project-content">
           <h3 class="project-title">Intelligent Traffic Monitoring System</h3>
-          <p class="project-description">Developed an automated traffic analysis system with vehicle detection and number plate recognition using YOLOv9 and OCR techniques.</p>
+          <p class="project-description">Automated traffic analysis system with vehicle detection and number plate recognition using YOLOv9 and OCR techniques for real-time monitoring.</p>
           <div class="project-tags">
-            <span class="project-tag">Python</span><span class="project-tag">OpenCV</span><span class="project-tag">YOLOv9</span><span class="project-tag">OCR</span><span class="project-tag">AI</span>
+            <span class="project-tag">Python</span><span class="project-tag">OpenCV</span><span class="project-tag">YOLOv9</span><span class="project-tag">OCR</span><span class="project-tag">AI/ML</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" class="project-link">View Project →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
         </div>
       </div>
 
-      <!-- Project 4 -->
+      <!-- Project 4: Lala Halwa House Bakery -->
       <div class="project-card">
-        <div class="project-image">
-          <!-- Replace src with "images/project4.jpg" -->
-          <img src="images/project4.jpg" alt="Lala Halwa House Sweet Shop UI"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-image-placeholder" style="display:none;">🍬</div>
+        <div class="project-image proj-bg-4">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="pg4warm" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2a1000"/>
+                <stop offset="100%" stop-color="#1a0a20"/>
+              </linearGradient>
+              <linearGradient id="pg4gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#d97706"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="200" fill="url(#pg4warm)"/>
+            <!-- Header bar -->
+            <rect x="0" y="0" width="400" height="36" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+            <!-- Logo area -->
+            <rect x="12" y="8" width="20" height="20" rx="4" fill="url(#pg4gold)"/>
+            <text x="40" y="22" font-size="11" fill="#f59e0b" font-family="serif" font-weight="bold">Lala Halwa House</text>
+            <text x="168" y="22" font-size="8" fill="rgba(245,158,11,.6)" font-family="sans-serif">🍰 Artisan Bakery</text>
+            <rect x="316" y="10" width="72" height="16" rx="4" fill="url(#pg4gold)"/>
+            <text x="352" y="22" text-anchor="middle" font-size="8" fill="#000" font-family="sans-serif" font-weight="bold">Order Now</text>
+            <!-- Hero banner area -->
+            <rect x="0" y="36" width="400" height="70" fill="rgba(245,158,11,.06)"/>
+            <!-- Decorative circles -->
+            <circle cx="330" cy="71" r="45" fill="rgba(245,158,11,.08)"/>
+            <circle cx="330" cy="71" r="35" fill="rgba(245,158,11,.07)"/>
+            <!-- Pastry icon -->
+            <ellipse cx="330" cy="75" rx="30" ry="14" fill="rgba(245,158,11,.25)" stroke="#f59e0b" stroke-width="1" stroke-opacity=".5"/>
+            <ellipse cx="330" cy="68" rx="22" ry="10" fill="rgba(236,72,153,.2)" stroke="#ec4899" stroke-width="1" stroke-opacity=".4"/>
+            <ellipse cx="330" cy="62" rx="14" ry="6" fill="rgba(245,158,11,.3)"/>
+            <text x="330" y="65" text-anchor="middle" font-size="14">🎂</text>
+            <!-- Hero text -->
+            <rect x="14" y="46" width="120" height="14" rx="3" fill="#f59e0b" opacity=".8"/>
+            <rect x="14" y="66" width="90" height="8" rx="3" fill="#fff" opacity=".35"/>
+            <rect x="14" y="80" width="65" height="8" rx="3" fill="#fff" opacity=".25"/>
+            <rect x="14" y="94" width="55" height="14" rx="4" fill="url(#pg4gold)"/>
+            <!-- Products grid -->
+            <rect x="0" y="106" width="400" height="94" fill="rgba(0,0,0,.3)"/>
+            <!-- product cards -->
+            <rect x="10" y="114" width="85" height="78" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+            <text x="52" y="150" text-anchor="middle" font-size="26">🥐</text>
+            <rect x="16" y="162" width="55" height="6" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="16" y="173" width="38" height="6" rx="2" fill="#f59e0b" opacity=".7"/>
+            <rect x="105" y="114" width="85" height="78" rx="8" fill="rgba(236,72,153,.07)" stroke="rgba(236,72,153,.2)" stroke-width="1"/>
+            <text x="147" y="150" text-anchor="middle" font-size="26">🍩</text>
+            <rect x="111" y="162" width="55" height="6" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="111" y="173" width="38" height="6" rx="2" fill="#ec4899" opacity=".7"/>
+            <rect x="200" y="114" width="85" height="78" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+            <text x="242" y="150" text-anchor="middle" font-size="26">🎂</text>
+            <rect x="206" y="162" width="55" height="6" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="206" y="173" width="38" height="6" rx="2" fill="#f59e0b" opacity=".7"/>
+            <rect x="295" y="114" width="96" height="78" rx="8" fill="rgba(99,102,241,.07)" stroke="rgba(99,102,241,.2)" stroke-width="1"/>
+            <text x="343" y="150" text-anchor="middle" font-size="26">🍪</text>
+            <rect x="301" y="162" width="60" height="6" rx="2" fill="#fff" opacity=".4"/>
+            <rect x="301" y="173" width="42" height="6" rx="2" fill="#6366f1" opacity=".7"/>
+            <!-- Figma badge -->
+            <rect x="290" y="4" width="52" height="16" rx="4" fill="rgba(99,102,241,.4)" stroke="#6366f1" stroke-width="1"/>
+            <text x="316" y="15" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">Figma UI</text>
+          </svg>
           <div class="project-image-overlay"><span>View Design ↗</span></div>
         </div>
         <div class="project-content">
-          <h3 class="project-title">Lala Halwa House — Sweet Shop UI</h3>
-          <p class="project-description">Designed a user-friendly e-commerce interface for a sweet shop business with responsive layouts and structured product displays.</p>
+          <h3 class="project-title">Lala Halwa House — Bakery UI</h3>
+          <p class="project-description">Designed a warm, inviting e-commerce UI for a traditional bakery shop. Warm color palette, product showcase layouts, and smooth navigation crafted in Figma.</p>
           <div class="project-tags">
-            <span class="project-tag">Figma</span><span class="project-tag">UI/UX</span><span class="project-tag">E-Commerce</span>
+            <span class="project-tag">Figma</span><span class="project-tag">UI/UX</span><span class="project-tag">Bakery</span><span class="project-tag">E-Commerce</span>
           </div>
-          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House" target="_blank" class="project-link">View Design →</a>
+          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House" target="_blank" rel="noopener" class="project-link">View Design →</a>
         </div>
       </div>
 
-      <!-- Project 5 -->
+      <!-- Project 5: AL IHSAN Corporate -->
       <div class="project-card">
-        <div class="project-image">
-          <!-- Replace src with "images/project5.jpg" -->
-          <img src="images/project5.jpg" alt="AL IHSAN Corporate Profile"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="project-image-placeholder" style="display:none;">🏢</div>
+        <div class="project-image proj-bg-5">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="pg5bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0a0f1a"/>
+                <stop offset="100%" stop-color="#0f1a2a"/>
+              </linearGradient>
+              <linearGradient id="pg5blue" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#22d3ee"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="200" fill="url(#pg5bg)"/>
+            <!-- Corporate brochure pages effect -->
+            <!-- Page 1 (back) -->
+            <rect x="20" y="20" width="160" height="162" rx="4" fill="#12192a" stroke="rgba(34,211,238,.2)" stroke-width="1" transform="rotate(-3 100 101)"/>
+            <!-- Page 2 (middle) -->
+            <rect x="30" y="18" width="160" height="164" rx="4" fill="#141d2e" stroke="rgba(34,211,238,.25)" stroke-width="1" transform="rotate(-1 110 100)"/>
+            <!-- Page 3 (front) -->
+            <rect x="40" y="16" width="160" height="168" rx="4" fill="#161f32" stroke="rgba(34,211,238,.3)" stroke-width="1"/>
+            <!-- Brochure cover content -->
+            <!-- Header bar -->
+            <rect x="40" y="16" width="160" height="28" rx="4" fill="url(#pg5blue)" opacity=".85"/>
+            <text x="120" y="33" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif" font-weight="bold">AL IHSAN DEVELOPMENT</text>
+            <!-- Logo placeholder -->
+            <rect x="48" y="52" width="36" height="36" rx="6" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="1"/>
+            <text x="66" y="74" text-anchor="middle" font-size="16">🏢</text>
+            <!-- Headline text bars -->
+            <rect x="90" y="54" width="100" height="8" rx="2" fill="#22d3ee" opacity=".7"/>
+            <rect x="90" y="68" width="80" height="5" rx="2" fill="#fff" opacity=".3"/>
+            <rect x="90" y="79" width="70" height="5" rx="2" fill="#fff" opacity=".2"/>
+            <!-- Divider -->
+            <rect x="48" y="96" width="144" height="1" fill="url(#pg5blue)" opacity=".5"/>
+            <!-- Body text blocks -->
+            <rect x="48" y="104" width="144" height="5" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="48" y="114" width="130" height="5" rx="2" fill="#fff" opacity=".12"/>
+            <rect x="48" y="124" width="140" height="5" rx="2" fill="#fff" opacity=".1"/>
+            <rect x="48" y="134" width="120" height="5" rx="2" fill="#fff" opacity=".12"/>
+            <!-- Stats row -->
+            <rect x="48" y="148" width="40" height="24" rx="4" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".4"/>
+            <text x="68" y="163" text-anchor="middle" font-size="10" fill="#22d3ee" font-family="sans-serif" font-weight="bold">15+</text>
+            <rect x="94" y="148" width="40" height="24" rx="4" fill="rgba(99,102,241,.1)" stroke="#6366f1" stroke-width="1" stroke-opacity=".4"/>
+            <text x="114" y="163" text-anchor="middle" font-size="10" fill="#6366f1" font-family="sans-serif" font-weight="bold">8K+</text>
+            <rect x="140" y="148" width="40" height="24" rx="4" fill="rgba(245,158,11,.1)" stroke="#f59e0b" stroke-width="1" stroke-opacity=".4"/>
+            <text x="160" y="163" text-anchor="middle" font-size="10" fill="#f59e0b" font-family="sans-serif" font-weight="bold">10yr</text>
+            <!-- Page number -->
+            <text x="190" y="180" text-anchor="end" font-size="7" fill="rgba(255,255,255,.25)" font-family="sans-serif">01 / 10</text>
+            <!-- Tool badge -->
+            <rect x="220" y="20" width="170" height="160" rx="6" fill="rgba(255,255,255,.02)"/>
+            <!-- Canva label -->
+            <rect x="240" y="30" width="60" height="18" rx="4" fill="rgba(245,158,11,.3)" stroke="#f59e0b" stroke-width="1"/>
+            <text x="270" y="42" text-anchor="middle" font-size="8" fill="#f59e0b" font-family="sans-serif" font-weight="bold">Canva</text>
+            <!-- 10 pages stacked -->
+            <text x="280" y="75" text-anchor="middle" font-size="30" opacity=".6">📄</text>
+            <text x="290" y="95" text-anchor="middle" font-size="10" fill="#fff" opacity=".4" font-family="sans-serif">10-Page Profile</text>
+            <rect x="230" y="110" width="150" height="5" rx="2" fill="#fff" opacity=".08"/>
+            <rect x="230" y="121" width="130" height="5" rx="2" fill="#fff" opacity=".06"/>
+            <rect x="230" y="132" width="140" height="5" rx="2" fill="#fff" opacity=".06"/>
+            <rect x="230" y="143" width="100" height="5" rx="2" fill="#fff" opacity=".05"/>
+            <!-- Download PDF button -->
+            <rect x="230" y="160" width="150" height="14" rx="4" fill="url(#pg5blue)" opacity=".7"/>
+            <text x="305" y="170" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">Download Corporate PDF</text>
+          </svg>
           <div class="project-image-overlay"><span>View Project ↗</span></div>
         </div>
         <div class="project-content">
           <h3 class="project-title">AL IHSAN Corporate Profile</h3>
-          <p class="project-description">Designed a 10-page corporate company profile with professional typography, branding, and structured layouts for business presentation.</p>
+          <p class="project-description">Designed a 10-page corporate company profile with professional typography, branding elements, and structured layouts delivered as a client-ready PDF brochure.</p>
           <div class="project-tags">
-            <span class="project-tag">Canva</span><span class="project-tag">Graphic Design</span><span class="project-tag">Branding</span>
+            <span class="project-tag">Canva</span><span class="project-tag">Graphic Design</span><span class="project-tag">Branding</span><span class="project-tag">PDF</span>
           </div>
-          <a href=https://docs.google.com/gview?url=https://raw.githubusercontent.com/varshini3123/al-ihsan-ui-design/main/AL_IHSAN_Company_Profile.pdf target="_blank" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" rel="noopener" class="project-link">View Project →</a>
         </div>
       </div>
 
@@ -901,69 +1163,214 @@
 
   <!-- ======= DESIGN WORKS SECTION ======= -->
   <section id="designs">
-    <h2 class="section-title reveal">Design Works</h2>
+    <div class="section-tag">✦ Creative Work</div>
+    <h2 class="section-title reveal">Design <span>Works</span></h2>
+    <div class="section-divider"></div>
     <div class="design-grid">
 
-      <!-- Design 1 -->
+      <!-- Design 1: Magazine -->
       <div class="design-card">
-        <div class="design-preview">
-          <!-- Replace src with "images/design1.jpg" — magazine cover/spread screenshot -->
-          <img src="images/design1.jpg" alt="Department Magazine Design"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="design-preview-placeholder" style="display:none;">📚</div>
+        <div class="design-preview design-bg-1">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="dg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6366f1" stop-opacity=".8"/>
+                <stop offset="100%" stop-color="#ec4899" stop-opacity=".6"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="190" fill="#0e0a1e"/>
+            <!-- Magazine cover -->
+            <rect x="30" y="10" width="155" height="170" rx="4" fill="#16103a" stroke="rgba(99,102,241,.4)" stroke-width="1.5"/>
+            <rect x="30" y="10" width="155" height="45" rx="4" fill="url(#dg1)"/>
+            <text x="107" y="28" text-anchor="middle" font-size="9" fill="#fff" font-family="serif" font-weight="bold">DEPARTMENT MAGAZINE</text>
+            <text x="107" y="42" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.7)" font-family="sans-serif">CS &amp; Business Systems • Vol. 1</text>
+            <!-- Cover image placeholder -->
+            <rect x="38" y="63" width="139" height="72" rx="3" fill="rgba(99,102,241,.15)"/>
+            <circle cx="107" cy="99" r="28" fill="rgba(236,72,153,.2)" stroke="#ec4899" stroke-width="1" stroke-opacity=".5"/>
+            <text x="107" y="104" text-anchor="middle" font-size="22">📚</text>
+            <!-- Cover text -->
+            <rect x="38" y="143" width="90" height="6" rx="2" fill="#fff" opacity=".5"/>
+            <rect x="38" y="154" width="70" height="5" rx="2" fill="#fff" opacity=".3"/>
+            <rect x="38" y="164" width="80" height="5" rx="2" fill="#fff" opacity=".25"/>
+            <!-- Page number chip -->
+            <rect x="152" y="165" width="25" height="12" rx="3" fill="url(#dg1)"/>
+            <text x="164" y="174" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">100</text>
+            <!-- Inner pages -->
+            <rect x="210" y="18" width="90" height="70" rx="3" fill="#16103a" stroke="rgba(99,102,241,.2)" stroke-width="1"/>
+            <rect x="216" y="24" width="78" height="4" rx="2" fill="url(#dg1)" opacity=".8"/>
+            <rect x="216" y="33" width="78" height="3" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="216" y="40" width="65" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="47" width="70" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="54" width="60" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="63" width="78" height="18" rx="3" fill="rgba(99,102,241,.15)"/>
+            <rect x="210" y="98" width="90" height="70" rx="3" fill="#16103a" stroke="rgba(236,72,153,.2)" stroke-width="1"/>
+            <rect x="216" y="104" width="78" height="14" rx="3" fill="rgba(236,72,153,.15)"/>
+            <rect x="216" y="123" width="78" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="130" width="65" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="137" width="70" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="144" width="55" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="216" y="155" width="35" height="8" rx="2" fill="rgba(245,158,11,.4)"/>
+            <rect x="310" y="18" width="76" height="150" rx="3" fill="#16103a" stroke="rgba(34,211,238,.15)" stroke-width="1"/>
+            <rect x="316" y="24" width="64" height="4" rx="2" fill="rgba(34,211,238,.5)"/>
+            <rect x="316" y="33" width="64" height="80" rx="3" fill="rgba(34,211,238,.08)"/>
+            <text x="348" y="78" text-anchor="middle" font-size="32" opacity=".4">🎓</text>
+            <rect x="316" y="122" width="64" height="3" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="316" y="130" width="50" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="316" y="138" width="55" height="3" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="316" y="146" width="40" height="3" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="316" y="155" width="64" height="8" rx="2" fill="url(#dg1)" opacity=".6"/>
+          </svg>
           <div class="design-image-overlay">
-            <a href="https://drive.google.com/file/d/1rA3BHH2HXm4GzsdWewsG8arAp8LLWXXc/view?usp=drive_link target="_blank" class="view-btn">View Design ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Design ↗</a>
           </div>
         </div>
         <div class="design-content">
-          <h3 class="design-title">Department Magazine Design</h3>
-          <p class="project-description">Led the planning, design, and execution of a 100-page departmental magazine, managing the entire workflow from concept to final publication.</p>
+          <h3 class="design-title">Department Magazine — 100 Pages</h3>
+          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Led end-to-end planning and design of a 100-page departmental magazine, managing the entire workflow from concept to final publication.</p>
           <div class="design-tools">
             <span class="design-tool">Canva</span><span class="design-tool">Adobe Photoshop</span><span class="design-tool">Layout Design</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" class="project-link">View Design →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Design →</a>
         </div>
       </div>
 
-      <!-- Design 2 -->
+      <!-- Design 2: Event Posters -->
       <div class="design-card">
-        <div class="design-preview">
-          <!-- Replace src with "images/design2.jpg" — event poster screenshot -->
-          <img src="images/design2.jpg" alt="Event Poster Designs"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="design-preview-placeholder" style="display:none;">🎨</div>
+        <div class="design-preview design-bg-2">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="dg2a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+              <linearGradient id="dg2b" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#22d3ee"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="190" fill="#0a0f0a"/>
+            <!-- Poster 1 (technical event) -->
+            <rect x="14" y="12" width="110" height="166" rx="6" fill="#12200a" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+            <rect x="14" y="12" width="110" height="40" rx="6" fill="url(#dg2b)"/>
+            <text x="69" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">TECHFEST 2K24</text>
+            <text x="69" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">Dept. of CS&amp;BS</text>
+            <circle cx="69" cy="90" r="36" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
+            <text x="69" y="98" text-anchor="middle" font-size="30">💻</text>
+            <rect x="22" y="138" width="94" height="5" rx="2" fill="#22d3ee" opacity=".5"/>
+            <rect x="22" y="148" width="70" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="22" y="157" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="32" y="168" width="74" height="8" rx="3" fill="url(#dg2b)" opacity=".8"/>
+            <!-- Poster 2 (cultural event) -->
+            <rect x="140" y="12" width="110" height="166" rx="6" fill="#200a12" stroke="rgba(236,72,153,.4)" stroke-width="1.5"/>
+            <rect x="140" y="12" width="110" height="40" rx="6" fill="url(#dg2a)"/>
+            <text x="195" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">CULTURALS 2K24</text>
+            <text x="195" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">Annual Event</text>
+            <circle cx="195" cy="90" r="36" fill="rgba(236,72,153,.08)" stroke="#ec4899" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
+            <text x="195" y="98" text-anchor="middle" font-size="30">🎭</text>
+            <rect x="148" y="138" width="94" height="5" rx="2" fill="#ec4899" opacity=".5"/>
+            <rect x="148" y="148" width="70" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="148" y="157" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="158" y="168" width="74" height="8" rx="3" fill="url(#dg2a)" opacity=".8"/>
+            <!-- Poster 3 (workshop) -->
+            <rect x="266" y="12" width="120" height="166" rx="6" fill="#0a1220" stroke="rgba(99,102,241,.4)" stroke-width="1.5"/>
+            <rect x="266" y="12" width="120" height="40" rx="6" fill="#6366f1" opacity=".8"/>
+            <text x="326" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">WORKSHOP 2K24</text>
+            <text x="326" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">UI/UX Design</text>
+            <circle cx="326" cy="90" r="36" fill="rgba(99,102,241,.08)" stroke="#6366f1" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
+            <text x="326" y="98" text-anchor="middle" font-size="30">🎨</text>
+            <rect x="274" y="138" width="104" height="5" rx="2" fill="#6366f1" opacity=".5"/>
+            <rect x="274" y="148" width="80" height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="274" y="157" width="90" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="284" y="168" width="84" height="8" rx="3" fill="#6366f1" opacity=".8"/>
+          </svg>
           <div class="design-image-overlay">
-            <a href="https://github.com/varshini3123" target="_blank" class="view-btn">View Designs ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Designs ↗</a>
           </div>
         </div>
         <div class="design-content">
           <h3 class="design-title">Event Poster Designs</h3>
-          <p class="project-description">Designed creative and visually engaging posters for departmental technical and non-technical events with typography and color theory principles.</p>
+          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Creative and visually engaging posters for departmental technical and non-technical events, applying typography hierarchy and color theory principles.</p>
           <div class="design-tools">
             <span class="design-tool">Canva</span><span class="design-tool">Figma</span><span class="design-tool">Adobe Photoshop</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" class="project-link">View Designs →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Designs →</a>
         </div>
       </div>
 
-      <!-- Design 3 -->
+      <!-- Design 3: Activity Posters -->
       <div class="design-card">
-        <div class="design-preview">
-          <!-- Replace src with "images/design3.jpg" — activity poster screenshot -->
-          <img src="images/design3.jpg" alt="Departmental Activity Posters"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="design-preview-placeholder" style="display:none;">🎯</div>
+        <div class="design-preview design-bg-3">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <defs>
+              <linearGradient id="dg3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="190" fill="#080f12"/>
+            <!-- Branding system mockup -->
+            <!-- Logo card -->
+            <rect x="10" y="10" width="175" height="80" rx="6" fill="#0f1820" stroke="rgba(34,211,238,.3)" stroke-width="1"/>
+            <text x="97" y="35" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="sans-serif" font-weight="bold">DEPT. IDENTITY SYSTEM</text>
+            <!-- Logo mark -->
+            <rect x="26" y="44" width="40" height="40" rx="6" fill="url(#dg3)" opacity=".8"/>
+            <text x="46" y="68" text-anchor="middle" font-size="18" fill="#fff">CS</text>
+            <!-- Color palette -->
+            <circle cx="88" cy="52" r="10" fill="#6366f1"/>
+            <circle cx="108" cy="52" r="10" fill="#ec4899"/>
+            <circle cx="128" cy="52" r="10" fill="#22d3ee"/>
+            <circle cx="148" cy="52" r="10" fill="#f59e0b"/>
+            <rect x="78" y="68" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="78" y="76" width="60" height="4" rx="2" fill="#fff" opacity=".15"/>
+            <!-- Social media post mockup -->
+            <rect x="10" y="100" width="85" height="80" rx="6" fill="#0f1820" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
+            <!-- phone frame -->
+            <rect x="16" y="106" width="73" height="68" rx="4" fill="#0a0f18"/>
+            <rect x="22" y="112" width="61" height="56" rx="3" fill="#12182a"/>
+            <rect x="22" y="112" width="61" height="22" rx="3" fill="url(#dg3)" opacity=".7"/>
+            <text x="52" y="127" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">Activity Post</text>
+            <rect x="26" y="138" width="53" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="26" y="146" width="40" height="4" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="26" y="155" width="20" height="9" rx="2" fill="#ec4899" opacity=".8"/>
+            <!-- Typography poster -->
+            <rect x="105" y="100" width="80" height="80" rx="6" fill="#0f1820" stroke="rgba(236,72,153,.3)" stroke-width="1"/>
+            <rect x="111" y="106" width="68" height="20" rx="3" fill="rgba(236,72,153,.2)"/>
+            <text x="145" y="119" text-anchor="middle" font-size="8" fill="#ec4899" font-family="sans-serif" font-weight="bold">TYPOGRAPHY</text>
+            <rect x="111" y="132" width="68" height="6" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="111" y="143" width="55" height="4" rx="2" fill="#fff" opacity=".12"/>
+            <rect x="111" y="152" width="60" height="4" rx="2" fill="#fff" opacity=".1"/>
+            <rect x="111" y="161" width="40" height="10" rx="3" fill="url(#dg3)" opacity=".7"/>
+            <!-- Illustration mockup -->
+            <rect x="200" y="10" width="190" height="170" rx="6" fill="#0f1820" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+            <!-- Visual branding mockup - Instagram grid style -->
+            <text x="295" y="30" text-anchor="middle" font-size="9" fill="#f59e0b" font-family="sans-serif" font-weight="bold">VISUAL BRAND SYSTEM</text>
+            <rect x="208" y="38" width="58" height="58" rx="4" fill="url(#dg3)" opacity=".5"/>
+            <text x="237" y="71" text-anchor="middle" font-size="22">🎯</text>
+            <rect x="272" y="38" width="58" height="58" rx="4" fill="rgba(236,72,153,.25)"/>
+            <text x="301" y="71" text-anchor="middle" font-size="22">🏆</text>
+            <rect x="336" y="38" width="55" height="58" rx="4" fill="rgba(245,158,11,.2)"/>
+            <text x="363" y="71" text-anchor="middle" font-size="22">✨</text>
+            <rect x="208" y="102" width="58" height="70" rx="4" fill="rgba(245,158,11,.15)"/>
+            <text x="237" y="140" text-anchor="middle" font-size="22">📋</text>
+            <rect x="272" y="102" width="119" height="70" rx="4" fill="rgba(99,102,241,.15)"/>
+            <rect x="280" y="110" width="103" height="7" rx="2" fill="url(#dg3)" opacity=".6"/>
+            <rect x="280" y="122" width="90" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="280" y="130" width="80" height="4" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="280" y="138" width="95" height="4" rx="2" fill="#fff" opacity=".12"/>
+            <rect x="280" y="148" width="50" height="16" rx="4" fill="url(#dg3)" opacity=".7"/>
+            <text x="305" y="159" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">View All</text>
+          </svg>
           <div class="design-image-overlay">
-            <a href="https://github.com/varshini3123" target="_blank" class="view-btn">View Designs ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Designs ↗</a>
           </div>
         </div>
         <div class="design-content">
-          <h3 class="design-title">Departmental Activity Posters</h3>
-          <p class="project-description">Designed posters and visual creatives for departmental activities, ensuring consistent branding and visual appeal across all materials.</p>
+          <h3 class="design-title">Departmental Activity Posters &amp; Branding</h3>
+          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Designed posters and visual creatives for departmental activities, ensuring consistent branding and visual appeal across all materials.</p>
           <div class="design-tools">
             <span class="design-tool">Figma</span><span class="design-tool">Visual Communication</span><span class="design-tool">Branding</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" class="project-link">View Designs →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Designs →</a>
         </div>
       </div>
 
