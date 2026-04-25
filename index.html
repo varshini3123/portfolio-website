@@ -4,560 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Varshini P | UI/UX Designer & Frontend Developer</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: #12121a;
-      --bg-card-hover: #1a1a25;
-      --indigo: #6366f1;
-      --pink: #ec4899;
-      --cyan: #22d3ee;
-      --amber: #f59e0b;
-      --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
-      --glass-bg: rgba(18, 18, 26, 0.8);
-      --glass-border: rgba(255, 255, 255, 0.1);
-    }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg-dark); color: var(--text-primary); overflow-x: hidden; cursor: none; }
-
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--indigo), var(--pink)); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--pink), var(--cyan)); }
-
-    /* Custom Cursor */
-    .cursor-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10001; box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan); transition: transform 0.1s ease; }
-    .cursor-ring { width: 40px; height: 40px; border: 2px solid var(--pink); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transition: transform 0.15s ease-out, width 0.2s, height 0.2s; transform: translate(-50%, -50%); }
-    .cursor-ring.hover { width: 60px; height: 60px; border-color: var(--amber); }
-
-    /* Noise Overlay */
-    .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
-
-    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-    /* Loading Screen */
-    .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10002; transition: opacity 0.5s ease, visibility 0.5s ease; }
-    .loader.hidden { opacity: 0; visibility: hidden; }
-    .loader-initials { font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800; background: linear-gradient(135deg, var(--indigo), var(--pink), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: pulse-scale 1s ease-in-out infinite; }
-    @keyframes pulse-scale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .loader-bar-container { width: 200px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 2rem; overflow: hidden; }
-    .loader-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--indigo), var(--pink), var(--cyan), var(--amber)); background-size: 200% 100%; border-radius: 2px; animation: loader-fill 2s ease forwards, gradient-shift 1s linear infinite; }
-    @keyframes loader-fill { to { width: 100%; } }
-    @keyframes gradient-shift { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-
-    /* Navigation */
-    .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; transform: translateY(-100%); animation: slide-down 0.5s ease 2.2s forwards; }
-    @keyframes slide-down { to { transform: translateY(0); } }
-    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s ease; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--indigo), var(--pink)); transition: width 0.3s ease; }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 25px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
-
-    /* Sections */
-    section { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
-    .section-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; position: relative; display: inline-block; }
-    .section-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, var(--indigo), var(--pink)); border-radius: 2px; }
-
-    /* =============================================
-       HERO SECTION - WITH PROFILE IMAGE
-       ============================================= */
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding-top: 8rem; }
-    .hero-content { opacity: 0; animation: fade-up 0.8s ease 2.4s forwards; }
-    @keyframes fade-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Profile image row inside hero content */
-    .hero-profile-row {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Profile Image with glowing gradient border */
-    .profile-image-wrapper {
-      position: relative;
-      flex-shrink: 0;
-      width: 150px;
-      height: 170px;
-      animation: profile-float 5s ease-in-out infinite;
-    }
-
-    @keyframes profile-float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-    }
-
-    /* Rotating gradient border ring */
-    .profile-image-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--indigo), var(--pink), var(--cyan), var(--indigo));
-      background-size: 300% 300%;
-      animation: border-rotate 3s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes border-rotate {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Glow behind the image */
-    .profile-image-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: -12px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
-      filter: blur(12px);
-      z-index: -1;
-      animation: glow-pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glow-pulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-
-    .profile-image-inner {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--bg-dark);
-      z-index: 1;
-      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.25), 0 5px 20px rgba(236, 72, 153, 0.15);
-    }
-
-    .profile-image-inner img {
-      width: 100%;
-      height: 120%;
-      object-fit: fill;
-      object-position: center top;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .profile-image-wrapper:hover .profile-image-inner img {
-      transform: scale(1.08);
-    }
-
-    /* Fallback initials if image fails */
-    .profile-fallback {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--indigo), var(--pink));
-      font-family: 'Syne', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: white;
-      border-radius: 50%;
-    }
-
-    .availability-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 50px; font-size: 0.875rem; color: var(--cyan); margin-bottom: 1.5rem; }
-    .availability-badge::before { content: ''; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
-
-    .hero-name { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-primary) 0%, var(--indigo) 25%, var(--pink) 50%, var(--cyan) 75%, var(--text-primary) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 3s linear infinite; }
-    @keyframes shimmer { to { background-position: 200% center; } }
-    .hero-title { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
-    .hero-description { color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; max-width: 500px; }
-    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .btn { padding: 0.875rem 1.75rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--pink)); color: var(--text-primary); border: none; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); }
-    .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--glass-border); }
-    .btn-secondary:hover { background: var(--glass-bg); border-color: var(--indigo); }
-
-    /* Hero Visual (right card) */
-    .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; opacity: 0; animation: fade-up 0.8s ease 2.6s forwards; }
-    .hero-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2.5rem; position: relative; transform-style: preserve-3d; animation: float 6s ease-in-out infinite; }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); } 25% { transform: translateY(-10px) rotateX(2deg) rotateY(2deg); } 50% { transform: translateY(-20px) rotateX(0) rotateY(-2deg); } 75% { transform: translateY(-10px) rotateX(-2deg) rotateY(0); } }
-
-    /* Hero card avatar — now shows profile photo */
-    .card-avatar { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; position: relative; overflow: hidden; border: 3px solid transparent; background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box, linear-gradient(135deg, var(--indigo), var(--pink), var(--cyan)) border-box; }
-    .card-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; }
-    .card-avatar-fallback { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, var(--indigo), var(--pink)); font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; border-radius: 50%; }
-
-    .card-role { text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem; }
-    .card-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .stat-item { text-align: center; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; }
-    .stat-value { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--cyan); }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
-
-    .spinning-ring { position: absolute; width: 350px; height: 350px; border: 2px dashed var(--glass-border); border-radius: 50%; animation: spin 20s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .glowing-orb { position: absolute; width: 200px; height: 200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent 70%); border-radius: 50%; filter: blur(40px); z-index: -1; animation: orb-pulse 4s ease-in-out infinite; }
-    @keyframes orb-pulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.2); } }
-
-    /* Skills Section */
-    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-    .skills-bars { display: flex; flex-direction: column; gap: 1.5rem; }
-    .skill-item { opacity: 0; transform: translateX(-30px); transition: all 0.5s ease; }
-    .skill-item.visible { opacity: 1; transform: translateX(0); }
-    .skill-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-    .skill-name { font-weight: 500; }
-    .skill-percent { color: var(--cyan); }
-    .skill-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
-    .skill-fill { height: 100%; width: 0; border-radius: 4px; position: relative; transition: width 1s ease; }
-    .skill-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); background-size: 200% 100%; }
-    .tech-chips { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .tech-chip { padding: 0.5rem 1rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 50px; font-size: 0.875rem; color: var(--text-secondary); transition: all 0.3s ease; opacity: 0; transform: translateY(20px); }
-    .tech-chip.visible { opacity: 1; transform: translateY(0); }
-    .tech-chip:hover { transform: translateY(-5px); border-color: var(--indigo); color: var(--text-primary); box-shadow: 0 5px 20px rgba(99, 102, 241, 0.2); }
-
-    /* Timeline */
-    .timeline { position: relative; padding-left: 3rem; }
-    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--indigo), var(--pink), var(--cyan), var(--amber)); border-radius: 2px; }
-    .timeline-item { position: relative; margin-bottom: 2.5rem; opacity: 0; transform: translateX(-30px); transition: all 0.5s ease; }
-    .timeline-item.visible { opacity: 1; transform: translateX(0); }
-    .timeline-item::before { content: ''; position: absolute; left: -3rem; top: 0.5rem; width: 12px; height: 12px; background: var(--indigo); border-radius: 50%; border: 3px solid var(--bg-dark); transform: translateX(-4.5px); }
-    .experience-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; }
-    .experience-card:hover { transform: translateX(10px); border-color: var(--indigo); box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15); }
-    .experience-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-    .experience-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 600; }
-    .experience-company { color: var(--cyan); margin-top: 0.25rem; }
-    .experience-date { color: var(--text-muted); font-size: 0.875rem; }
-    .experience-description { color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem; }
-    .experience-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .experience-tag { padding: 0.25rem 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 50px; font-size: 0.75rem; color: var(--indigo); }
-    .experience-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--pink); text-decoration: none; font-size: 0.875rem; transition: color 0.3s ease; }
-    .experience-link:hover { color: var(--cyan); }
-
-    /* =============================================
-       PROJECT CARDS — ENHANCED WITH IMAGES
-       ============================================= */
-    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      position: relative;
-    }
-
-    .project-card.visible { opacity: 1; transform: translateY(0); }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--indigo), var(--pink), var(--cyan));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 2;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.1);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-
-    .project-card:hover::before { opacity: 1; }
-
-    /* Project image container */
-    .project-image {
-      width: 100%;
-      height: 210px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    }
-
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      filter: brightness(0.9);
-    }
-
-    /* Emoji/icon fallback for project images */
-    .project-image-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      background: linear-gradient(135deg, var(--bg-card-hover), #1e1e30);
-      transition: transform 0.4s ease;
-    }
-
-    /* Hover overlay on project image */
-    .project-image-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 15, 0.7) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .project-image-overlay span {
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
-      padding: 0.5rem 1.2rem;
-      border: 2px solid rgba(255,255,255,0.8);
-      border-radius: 50px;
-      backdrop-filter: blur(4px);
-      letter-spacing: 0.05em;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease 0.1s;
-    }
-
-    .project-card:hover .project-image img { transform: scale(1.08); filter: brightness(1.1); }
-    .project-card:hover .project-image-placeholder { transform: scale(1.08); }
-    .project-card:hover .project-image-overlay { opacity: 1; }
-    .project-card:hover .project-image-overlay span { opacity: 1; transform: translateY(0); }
-
-    .project-content { padding: 1.5rem; }
-    .project-title { font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; }
-    .project-description { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .project-tag { padding: 0.25rem 0.5rem; background: rgba(34, 211, 238, 0.1); border-radius: 4px; font-size: 0.75rem; color: var(--cyan); }
-    .project-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--pink); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.3s ease; }
-    .project-link:hover { color: var(--cyan); }
-
-    /* =============================================
-       DESIGN WORKS — ENHANCED WITH THUMBNAILS
-       ============================================= */
-    .design-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-
-    .design-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .design-card.visible { opacity: 1; transform: translateY(0); }
-
-    .design-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--amber);
-      box-shadow: 0 20px 50px rgba(245, 158, 11, 0.15), 0 0 30px rgba(245, 158, 11, 0.08);
-    }
-
-    /* Design preview image */
-    .design-preview {
-      width: 100%;
-      height: 200px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .design-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      filter: brightness(0.85);
-    }
-
-    .design-preview-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
-      transition: transform 0.4s ease;
-    }
-
-    /* Hover overlay on design image */
-    .design-image-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 30%, rgba(10,10,15,0.8) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
-    }
-
-    .design-image-overlay .view-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: white;
-      font-weight: 600;
-      font-size: 0.85rem;
-      padding: 0.45rem 1rem;
-      background: rgba(245, 158, 11, 0.85);
-      border-radius: 50px;
-      text-decoration: none;
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      transform: translateY(8px);
-      transition: all 0.3s ease 0.1s;
-    }
-
-    .design-card:hover .design-preview img { transform: scale(1.08); filter: brightness(1.05); }
-    .design-card:hover .design-preview-placeholder { transform: scale(1.08); }
-    .design-card:hover .design-image-overlay { opacity: 1; }
-    .design-card:hover .design-image-overlay .view-btn { opacity: 1; transform: translateY(0); }
-
-    .design-content { padding: 1.5rem; }
-    .design-title { font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .design-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .design-tool { padding: 0.25rem 0.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 4px; font-size: 0.75rem; color: var(--amber); }
-
-    /* Education */
-    .education-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    .education-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem; opacity: 0; transform: translateY(30px); transition: all 0.5s ease; }
-    .education-card.visible { opacity: 1; transform: translateY(0); }
-    .education-card:hover { border-color: var(--cyan); }
-    .education-degree { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .education-institution { color: var(--cyan); margin-bottom: 0.5rem; }
-    .education-year { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem; }
-    .education-score { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(34, 211, 238, 0.1); border-radius: 50px; color: var(--cyan); font-weight: 600; }
-
-    /* Soft Skills */
-    .languages-container { margin-top: 2rem; }
-    .languages-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
-    .language-badges { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .language-badge { padding: 0.75rem 1.5rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 50px; opacity: 0; transform: scale(0.8); transition: all 0.5s ease; }
-    .language-badge.visible { opacity: 1; transform: scale(1); animation: badge-pulse 2s ease-in-out infinite; }
-    @keyframes badge-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); } }
-
-    /* Achievements */
-    .achievements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .achievement-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.5s ease; }
-    .achievement-card.visible { opacity: 1; transform: translateY(0); }
-    .achievement-card:hover { border-color: var(--amber); transform: translateY(-5px); }
-    .achievement-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .achievement-title { font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
-    .achievement-event { color: var(--amber); font-size: 0.875rem; margin-bottom: 0.5rem; }
-    .achievement-description { color: var(--text-muted); font-size: 0.875rem; }
-
-    /* Contact */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-card { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 12px; text-decoration: none; color: var(--text-primary); transition: all 0.3s ease; opacity: 0; transform: translateX(-30px); }
-    .contact-card.visible { opacity: 1; transform: translateX(0); }
-    .contact-card:hover { transform: translateX(10px); border-color: var(--indigo); background: var(--bg-card-hover); }
-    .contact-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--indigo), var(--pink)); border-radius: 12px; font-size: 1.25rem; }
-    .contact-info h4 { font-weight: 500; margin-bottom: 0.25rem; }
-    .contact-info span { color: var(--text-muted); font-size: 0.875rem; }
-    .contact-avatar-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
-    .contact-avatar { width: 150px; height: 150px; background: linear-gradient(135deg, var(--indigo), var(--pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; position: relative; z-index: 1; animation: avatar-pulse 3s ease-in-out infinite; }
-    @keyframes avatar-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .ripple { position: absolute; width: 150px; height: 150px; border: 2px solid var(--indigo); border-radius: 50%; animation: ripple-expand 3s ease-out infinite; }
-    .ripple:nth-child(2) { animation-delay: 1s; }
-    .ripple:nth-child(3) { animation-delay: 2s; }
-    @keyframes ripple-expand { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
-
-    footer { text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--glass-border); }
-    footer a { color: var(--indigo); text-decoration: none; }
-    footer a:hover { color: var(--pink); }
-
-    /* Marquee */
-    .marquee-container { overflow: hidden; padding: 2rem 0; background: var(--bg-card); margin: 2rem 0; }
-    .marquee { display: flex; animation: marquee 30s linear infinite; }
-    .marquee-content { display: flex; gap: 3rem; padding: 0 1.5rem; }
-    .marquee-item { white-space: nowrap; font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--text-muted); opacity: 0.5; }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* Soft skills */
-    .soft-skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .soft-skill-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; opacity: 0; transform: translateY(20px); }
-    .soft-skill-card.visible { opacity: 1; transform: translateY(0); }
-    .soft-skill-card:hover { border-color: var(--pink); transform: translateY(-5px); }
-    .soft-skill-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-    .soft-skill-name { font-weight: 500; color: var(--text-primary); }
-
-    /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 0.6s ease; }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right { opacity: 0; transform: translateX(50px); transition: all 0.6s ease; }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-    /* =============================================
-       RESPONSIVE
-       ============================================= */
-    @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-name { font-size: 3rem; }
-      .hero-profile-row { flex-direction: column; align-items: center; }
-      .hero-description { margin: 0 auto 2rem; }
-      .hero-buttons { justify-content: center; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .projects-grid, .design-grid, .achievements-grid { grid-template-columns: repeat(2, 1fr); }
-      .education-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; text-align: center; }
-      .contact-avatar-wrapper { order: -1; margin-bottom: 2rem; }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links { position: fixed; top: 70px; left: 0; width: 100%; flex-direction: column; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 2rem; gap: 1.5rem; transform: translateY(-150%); transition: transform 0.3s ease; }
-      .nav-links.active { transform: translateY(0); }
-      .nav-toggle { display: flex; }
-      .hero-name { font-size: 2.5rem; }
-      .section-title { font-size: 2rem; }
-      .projects-grid, .design-grid, .achievements-grid { grid-template-columns: 1fr; }
-      .card-stats { grid-template-columns: 1fr; }
-      section { padding: 4rem 1rem; }
-      .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .profile-image-wrapper { width: 120px; height: 120px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-profile-row { gap: 1rem; }
-      .profile-image-wrapper { width: 100px; height: 100px; }
-    }
-  </style>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"  id="cursor-dot"></div>
   <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Noise texture overlay -->
   <div class="noise-overlay"></div>
+
+  <!-- Particle background -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Loading Screen -->
+  <!-- =====================================================
+       LOADING SCREEN
+       ===================================================== -->
   <div class="loader" id="loader">
     <div class="loader-initials">VP</div>
     <div class="loader-bar-container">
@@ -565,10 +35,13 @@
     </div>
   </div>
 
-  <!-- Navigation -->
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="nav-logo">Varshini P</a>
+
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -579,20 +52,24 @@
         <li><a href="#achievements">Achievements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ======= HERO SECTION ======= -->
+  <!-- =====================================================
+       HERO SECTION
+       ===================================================== -->
   <section class="hero" id="about">
     <div class="hero-content">
       <div class="availability-badge">Available for opportunities</div>
 
-      <!-- Profile image + name row -->
+      <!-- Profile image + name -->
       <div class="hero-profile-row">
-        <!-- PROFILE IMAGE — replace src with "images/profile.jpg" when ready -->
         <div class="profile-image-wrapper">
           <div class="profile-image-inner">
             <img
@@ -606,32 +83,38 @@
 
         <div>
           <h1 class="hero-name">Varshini P</h1>
-          <p class="hero-title">UI/UX Designer & Frontend Developer</p>
+          <p class="hero-title">UI/UX Designer &amp; Frontend Developer</p>
         </div>
       </div>
 
       <p class="hero-description">
-        Motivated and detail-oriented B.Tech Computer Science and Business Systems student with a strong focus on UI/UX design and frontend development. Passionate about creating seamless user experiences and visually appealing digital interfaces.
+        Motivated and detail-oriented B.Tech Computer Science and Business Systems student
+        with a strong focus on UI/UX design and frontend development. Passionate about
+        creating seamless user experiences and visually appealing digital interfaces.
       </p>
+
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">
           <span>View Projects</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <a href=https://drive.google.com/file/d/1xeXpu9Ucyp7WH_qF29ICvaRmsXoHi-hE/view?usp=sharing target="_blank" class="btn btn-secondary">
+        <a href="https://drive.google.com/uc?export=download&id=1xeXpu9Ucyp7WH_qF29ICvaRmsXoHi-hE" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
           <span>Download Resume</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
         </a>
       </div>
     </div>
 
-    <!-- Right side floating card -->
+    <!-- Right-side floating card -->
     <div class="hero-visual">
       <div class="spinning-ring"></div>
       <div class="glowing-orb"></div>
       <div class="hero-card">
         <div class="card-avatar">
-          <!-- Same profile image in the card -->
           <img
             src="images/profile.jpg"
             alt="Varshini P"
@@ -639,7 +122,7 @@
           >
           <span class="card-avatar-fallback" style="display:none;">VP</span>
         </div>
-        <p class="card-role">UI/UX Designer & Frontend Developer</p>
+        <p class="card-role">UI/UX Designer &amp; Frontend Developer</p>
         <div class="card-stats">
           <div class="stat-item">
             <div class="stat-value">5+</div>
@@ -658,8 +141,10 @@
     </div>
   </section>
 
-  <!-- Marquee -->
-  <div class="marquee-container">
+  <!-- =====================================================
+       MARQUEE
+       ===================================================== -->
+  <div class="marquee-container" aria-hidden="true">
     <div class="marquee">
       <div class="marquee-content">
         <span class="marquee-item">Figma</span><span class="marquee-item">•</span>
@@ -675,7 +160,8 @@
         <span class="marquee-item">Spring Boot</span><span class="marquee-item">•</span>
         <span class="marquee-item">GCP</span>
       </div>
-      <div class="marquee-content">
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-content" aria-hidden="true">
         <span class="marquee-item">Figma</span><span class="marquee-item">•</span>
         <span class="marquee-item">Adobe XD</span><span class="marquee-item">•</span>
         <span class="marquee-item">Photoshop</span><span class="marquee-item">•</span>
@@ -692,60 +178,127 @@
     </div>
   </div>
 
-  <!-- ======= SKILLS SECTION ======= -->
+  <!-- =====================================================
+       SKILLS SECTION
+       ===================================================== -->
   <section id="skills">
-    <h2 class="section-title reveal">Skills & Technologies</h2>
+    <h2 class="section-title reveal">Skills &amp; Technologies</h2>
+
     <div class="skills-grid">
+      <!-- Skill bars -->
       <div class="skills-bars">
         <div class="skill-item" data-skill="90">
-          <div class="skill-header"><span class="skill-name">UI/UX Design (Figma, Adobe XD)</span><span class="skill-percent">90%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--indigo), var(--pink));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">UI/UX Design (Figma, Adobe XD)</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--indigo), var(--pink));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="85">
-          <div class="skill-header"><span class="skill-name">HTML & CSS</span><span class="skill-percent">85%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--cyan), var(--indigo));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">HTML &amp; CSS</span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--cyan), var(--indigo));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="75">
-          <div class="skill-header"><span class="skill-name">JavaScript</span><span class="skill-percent">75%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--amber), var(--pink));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-percent">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--amber), var(--pink));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="80">
-          <div class="skill-header"><span class="skill-name">Graphic Design (Photoshop, Canva)</span><span class="skill-percent">80%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--pink), var(--amber));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">Graphic Design (Photoshop, Canva)</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--pink), var(--amber));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="70">
-          <div class="skill-header"><span class="skill-name">Python</span><span class="skill-percent">70%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--indigo), var(--cyan));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">Python</span>
+            <span class="skill-percent">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--indigo), var(--cyan));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="65">
-          <div class="skill-header"><span class="skill-name">Java & Spring Boot</span><span class="skill-percent">65%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--amber), var(--indigo));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">Java &amp; Spring Boot</span>
+            <span class="skill-percent">65%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--amber), var(--indigo));"></div>
+          </div>
         </div>
+
         <div class="skill-item" data-skill="70">
-          <div class="skill-header"><span class="skill-name">Database (MySQL, Oracle)</span><span class="skill-percent">70%</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="background: linear-gradient(90deg, var(--cyan), var(--pink));"></div></div>
+          <div class="skill-header">
+            <span class="skill-name">Database (MySQL, Oracle)</span>
+            <span class="skill-percent">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="background: linear-gradient(90deg, var(--cyan), var(--pink));"></div>
+          </div>
         </div>
       </div>
+
+      <!-- Tech chips -->
       <div>
         <h3 style="margin-bottom: 1.5rem; font-family: 'Syne', sans-serif;">Tech Stack</h3>
         <div class="tech-chips">
-          <span class="tech-chip">Figma</span><span class="tech-chip">Adobe XD</span><span class="tech-chip">Photoshop</span>
-          <span class="tech-chip">Illustrator</span><span class="tech-chip">Canva</span><span class="tech-chip">InVision</span>
-          <span class="tech-chip">Wireframe.cc</span><span class="tech-chip">HTML5</span><span class="tech-chip">CSS3</span>
-          <span class="tech-chip">JavaScript</span><span class="tech-chip">Python</span><span class="tech-chip">Java</span>
-          <span class="tech-chip">Spring Boot</span><span class="tech-chip">MySQL</span><span class="tech-chip">Oracle</span>
-          <span class="tech-chip">SQL</span><span class="tech-chip">OpenCV</span><span class="tech-chip">YOLOv9</span>
-          <span class="tech-chip">OCR</span><span class="tech-chip">GCP</span><span class="tech-chip">GitHub Pages</span>
-          <span class="tech-chip">Typography</span><span class="tech-chip">Layout Design</span>
+          <span class="tech-chip">Figma</span>
+          <span class="tech-chip">Adobe XD</span>
+          <span class="tech-chip">Photoshop</span>
+          <span class="tech-chip">Illustrator</span>
+          <span class="tech-chip">Canva</span>
+          <span class="tech-chip">InVision</span>
+          <span class="tech-chip">Wireframe.cc</span>
+          <span class="tech-chip">HTML5</span>
+          <span class="tech-chip">CSS3</span>
+          <span class="tech-chip">JavaScript</span>
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">Java</span>
+          <span class="tech-chip">Spring Boot</span>
+          <span class="tech-chip">MySQL</span>
+          <span class="tech-chip">Oracle</span>
+          <span class="tech-chip">SQL</span>
+          <span class="tech-chip">OpenCV</span>
+          <span class="tech-chip">YOLOv9</span>
+          <span class="tech-chip">OCR</span>
+          <span class="tech-chip">GCP</span>
+          <span class="tech-chip">GitHub Pages</span>
+          <span class="tech-chip">Typography</span>
+          <span class="tech-chip">Layout Design</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======= EXPERIENCE SECTION ======= -->
+  <!-- =====================================================
+       EXPERIENCE SECTION
+       ===================================================== -->
   <section id="experience">
     <h2 class="section-title reveal">Work Experience</h2>
+
     <div class="timeline">
+
+      <!-- Experience 1 -->
       <div class="timeline-item">
         <div class="experience-card">
           <div class="experience-header">
@@ -755,13 +308,22 @@
             </div>
             <span class="experience-date">Freelance</span>
           </div>
-          <p class="experience-description">Designed a user-friendly e-commerce interface using Figma for a sweet shop business. Developed responsive layouts to ensure smooth usability across mobile and desktop devices. Structured product displays and navigation to improve customer browsing experience.</p>
+          <p class="experience-description">
+            Designed a user-friendly e-commerce interface using Figma for a sweet shop business.
+            Developed responsive layouts to ensure smooth usability across mobile and desktop devices.
+            Structured product displays and navigation to improve customer browsing experience.
+          </p>
           <div class="experience-tags">
-            <span class="experience-tag">Figma</span><span class="experience-tag">UI Design</span><span class="experience-tag">E-Commerce</span><span class="experience-tag">Responsive Design</span>
+            <span class="experience-tag">Figma</span>
+            <span class="experience-tag">UI Design</span>
+            <span class="experience-tag">E-Commerce</span>
+            <span class="experience-tag">Responsive Design</span>
           </div>
-          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House?node-id=0-1&p=f&t=06IUs4a6Mz6TpLqW-0" target="_blank" class="experience-link">View Design →</a>
+          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House?node-id=0-1&p=f&t=06IUs4a6Mz6TpLqW-0" target="_blank" rel="noopener noreferrer" class="experience-link">View Design →</a>
         </div>
       </div>
+
+      <!-- Experience 2 -->
       <div class="timeline-item">
         <div class="experience-card">
           <div class="experience-header">
@@ -771,13 +333,22 @@
             </div>
             <span class="experience-date">Freelance</span>
           </div>
-          <p class="experience-description">Designed a 10-page corporate company profile using Canva. Developed structured layouts with professional typography and branding. Delivered a client-ready PDF brochure for business presentation.</p>
+          <p class="experience-description">
+            Designed a 10-page corporate company profile using Canva. Developed structured layouts
+            with professional typography and branding. Delivered a client-ready PDF brochure for
+            business presentation.
+          </p>
           <div class="experience-tags">
-            <span class="experience-tag">Canva</span><span class="experience-tag">Graphic Design</span><span class="experience-tag">Branding</span><span class="experience-tag">Corporate Design</span>
+            <span class="experience-tag">Canva</span>
+            <span class="experience-tag">Graphic Design</span>
+            <span class="experience-tag">Branding</span>
+            <span class="experience-tag">Corporate Design</span>
           </div>
-          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" class="experience-link">View Project →</a>
+          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" rel="noopener noreferrer" class="experience-link">View Project →</a>
         </div>
       </div>
+
+      <!-- Experience 3 -->
       <div class="timeline-item">
         <div class="experience-card">
           <div class="experience-header">
@@ -787,25 +358,35 @@
             </div>
             <span class="experience-date">Internship</span>
           </div>
-          <p class="experience-description">Gained hands-on experience in VM configuration, containerization fundamentals, and Google Cloud Platform (GCP) services. Understood and applied the complete application deployment lifecycle, including setup, testing, and deployment processes.</p>
+          <p class="experience-description">
+            Gained hands-on experience in VM configuration, containerization fundamentals, and
+            Google Cloud Platform (GCP) services. Understood and applied the complete application
+            deployment lifecycle, including setup, testing, and deployment processes.
+          </p>
           <div class="experience-tags">
-            <span class="experience-tag">GCP</span><span class="experience-tag">Cloud Computing</span><span class="experience-tag">VM Configuration</span><span class="experience-tag">Deployment</span>
+            <span class="experience-tag">GCP</span>
+            <span class="experience-tag">Cloud Computing</span>
+            <span class="experience-tag">VM Configuration</span>
+            <span class="experience-tag">Deployment</span>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ======= PROJECTS SECTION ======= -->
+  <!-- =====================================================
+       PROJECTS SECTION
+       ===================================================== -->
   <section id="projects">
     <h2 class="section-title reveal">Projects</h2>
+
     <div class="projects-grid">
 
-      <!-- Project 1 -->
+      <!-- Project 1 — Amazon-Inspired E-Commerce -->
       <div class="project-card">
-        <div class="project-image proj-bg-1">
-          <!-- Professional SVG illustration for e-commerce -->
-          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="pg1a" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#6366f1" stop-opacity=".6"/>
@@ -816,45 +397,37 @@
                 <stop offset="100%" stop-color="#6366f1" stop-opacity=".3"/>
               </linearGradient>
             </defs>
-            <!-- Nav bar -->
-            <rect x="0" y="0" width="400" height="28" fill="#131326" rx="0"/>
+            <rect x="0" y="0" width="400" height="28" fill="#131326"/>
             <rect x="12" y="8" width="60" height="12" rx="3" fill="#f59e0b" opacity=".9"/>
             <rect x="82" y="10" width="180" height="8" rx="4" fill="#ffffff" opacity=".12"/>
             <rect x="270" y="8" width="30" height="12" rx="3" fill="#6366f1" opacity=".7"/>
             <rect x="308" y="8" width="30" height="12" rx="3" fill="#6366f1" opacity=".5"/>
             <rect x="346" y="8" width="42" height="12" rx="3" fill="#ec4899" opacity=".8"/>
-            <!-- Hero banner -->
             <rect x="0" y="28" width="400" height="60" fill="url(#pg1a)"/>
             <rect x="14" y="38" width="100" height="12" rx="3" fill="#fff" opacity=".85"/>
             <rect x="14" y="56" width="70" height="8" rx="3" fill="#fff" opacity=".5"/>
             <rect x="14" y="68" width="48" height="12" rx="4" fill="#f59e0b"/>
             <rect x="220" y="30" width="170" height="56" rx="6" fill="#fff" opacity=".06"/>
-            <!-- Products row -->
             <rect x="0" y="88" width="400" height="112" fill="#0d0d1e"/>
-            <!-- card 1 -->
             <rect x="12" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
             <rect x="18" y="104" width="70" height="52" rx="4" fill="url(#pg1b)"/>
             <rect x="18" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
             <rect x="18" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
-            <!-- card 2 -->
             <rect x="102" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
             <rect x="108" y="104" width="70" height="52" rx="4" fill="#22223a"/>
             <circle cx="143" cy="130" r="20" fill="#ec4899" opacity=".3"/>
             <rect x="108" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
             <rect x="108" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
-            <!-- card 3 -->
             <rect x="192" y="98" width="82" height="92" rx="6" fill="#1a1a2e"/>
             <rect x="198" y="104" width="70" height="52" rx="4" fill="#22223a"/>
             <rect x="210" y="112" width="46" height="36" rx="3" fill="#6366f1" opacity=".35"/>
             <rect x="198" y="162" width="50" height="7" rx="2" fill="#fff" opacity=".6"/>
             <rect x="198" y="173" width="35" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
-            <!-- card 4 -->
             <rect x="282" y="98" width="106" height="92" rx="6" fill="#1a1a2e"/>
             <rect x="290" y="104" width="90" height="52" rx="4" fill="#22223a"/>
             <circle cx="335" cy="130" r="22" fill="#22d3ee" opacity=".2"/>
             <rect x="290" y="162" width="65" height="7" rx="2" fill="#fff" opacity=".6"/>
             <rect x="290" y="173" width="45" height="7" rx="2" fill="#f59e0b" opacity=".8"/>
-            <!-- shopping cart badge -->
             <circle cx="370" cy="12" r="8" fill="#ec4899" opacity=".9"/>
             <text x="370" y="16" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif">3</text>
           </svg>
@@ -864,16 +437,19 @@
           <h3 class="project-title">Amazon-Inspired E-Commerce Interface</h3>
           <p class="project-description">Engineered a visually structured e-commerce web interface replicating real-world online shopping layouts with reusable UI components and responsive styling.</p>
           <div class="project-tags">
-            <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Responsive</span>
           </div>
-          <a href="https://varshini3123.github.io/amazon-clone/" target="_blank" rel="noopener" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/amazon-clone/" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
         </div>
       </div>
 
-      <!-- Project 2: Travel & Tourism -->
+      <!-- Project 2 — Travel & Tourism -->
       <div class="project-card">
-        <div class="project-image proj-bg-2">
-          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="pg2sky" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#0a3070"/>
@@ -884,43 +460,34 @@
                 <stop offset="100%" stop-color="#0a2a20"/>
               </linearGradient>
             </defs>
-            <!-- Sky -->
             <rect x="0" y="0" width="400" height="130" fill="url(#pg2sky)"/>
-            <!-- Sun/Moon -->
             <circle cx="310" cy="40" r="28" fill="#f59e0b" opacity=".5"/>
             <circle cx="310" cy="40" r="22" fill="#f59e0b" opacity=".7"/>
-            <!-- Stars -->
             <circle cx="30" cy="20" r="1.5" fill="#fff" opacity=".7"/>
             <circle cx="80" cy="15" r="1" fill="#fff" opacity=".5"/>
             <circle cx="150" cy="25" r="1.5" fill="#fff" opacity=".6"/>
             <circle cx="200" cy="10" r="1" fill="#fff" opacity=".5"/>
             <circle cx="250" cy="30" r="1.5" fill="#fff" opacity=".4"/>
-            <!-- Mountains -->
             <polygon points="0,130 80,60 160,130" fill="#0a1a3a" opacity=".9"/>
             <polygon points="60,130 160,50 260,130" fill="#0d2040" opacity=".85"/>
             <polygon points="140,130 260,55 380,130" fill="#102548" opacity=".8"/>
-            <!-- Ground -->
             <rect x="0" y="128" width="400" height="72" fill="url(#pg2land)"/>
-            <!-- Road -->
             <path d="M180,200 L220,200 L240,130 L160,130 Z" fill="#1a1a2e" opacity=".8"/>
             <rect x="197" y="140" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
             <rect x="197" y="160" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
             <rect x="197" y="180" width="6" height="15" rx="2" fill="#fff" opacity=".4"/>
-            <!-- Nav bar -->
             <rect x="0" y="0" width="400" height="26" fill="rgba(0,0,0,.55)"/>
             <rect x="12" y="7" width="50" height="12" rx="3" fill="#22d3ee" opacity=".8"/>
             <rect x="76" y="9" width="30" height="8" rx="3" fill="#fff" opacity=".4"/>
             <rect x="114" y="9" width="40" height="8" rx="3" fill="#fff" opacity=".4"/>
             <rect x="162" y="9" width="48" height="8" rx="3" fill="#fff" opacity=".4"/>
             <rect x="338" y="7" width="50" height="12" rx="4" fill="#ec4899" opacity=".85"/>
-            <!-- Destination cards -->
             <rect x="8" y="140" width="80" height="50" rx="6" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
             <rect x="12" y="144" width="72" height="30" rx="4" fill="rgba(34,211,238,.15)"/>
             <rect x="12" y="178" width="45" height="6" rx="2" fill="#fff" opacity=".5"/>
             <rect x="100" y="140" width="80" height="50" rx="6" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
             <rect x="104" y="144" width="72" height="30" rx="4" fill="rgba(236,72,153,.15)"/>
             <rect x="104" y="178" width="45" height="6" rx="2" fill="#fff" opacity=".5"/>
-            <!-- Plane -->
             <g transform="translate(330,70) rotate(-20)">
               <polygon points="0,-6 20,0 0,6" fill="#fff" opacity=".85"/>
               <polygon points="0,-2 -10,-8 -12,-6 0,0" fill="#fff" opacity=".6"/>
@@ -933,16 +500,19 @@
           <h3 class="project-title">Travel &amp; Tourism Website</h3>
           <p class="project-description">Developed a responsive travel and tourism website with structured navigation, destination sections, and basic SEO techniques for improved search visibility.</p>
           <div class="project-tags">
-            <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">SEO</span>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">SEO</span>
           </div>
-          <a href="https://varshini3123.github.io/travel-tourism-frontend/" target="_blank" rel="noopener" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/travel-tourism-frontend/" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
         </div>
       </div>
 
-      <!-- Project 3: Traffic Monitoring -->
+      <!-- Project 3 — Traffic Monitoring -->
       <div class="project-card">
-        <div class="project-image proj-bg-3">
-          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="pg3road" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#1a2a1a"/>
@@ -950,47 +520,37 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="200" fill="#080f08"/>
-            <!-- Road -->
             <rect x="0" y="90" width="400" height="110" fill="url(#pg3road)"/>
             <rect x="0" y="90" width="400" height="3" fill="#22d3ee" opacity=".3"/>
-            <!-- Lane markers -->
-            <rect x="0" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <rect x="80" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <rect x="160" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <rect x="240" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <rect x="320" y="138" width="60" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <!-- Buildings bg -->
-            <rect x="0" y="20" width="50" height="70" fill="#111a11" rx="2"/>
+            <rect x="0"   y="138" width="60"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="80"  y="138" width="60"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="160" y="138" width="60"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="240" y="138" width="60"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="320" y="138" width="60"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="0"  y="20" width="50" height="70" fill="#111a11" rx="2"/>
             <rect x="55" y="35" width="35" height="55" fill="#0f180f" rx="2"/>
             <rect x="95" y="15" width="45" height="75" fill="#121a12" rx="2"/>
             <rect x="290" y="25" width="40" height="65" fill="#111a11" rx="2"/>
             <rect x="335" y="10" width="65" height="80" fill="#0f180f" rx="2"/>
-            <!-- Detection boxes on cars -->
-            <!-- Car 1 -->
             <rect x="40" y="100" width="65" height="35" rx="5" fill="#22d3ee" opacity=".15"/>
             <rect x="40" y="100" width="65" height="35" rx="5" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="4,2"/>
             <rect x="48" y="108" width="49" height="19" rx="3" fill="#22d3ee" opacity=".25"/>
-            <!-- Car 2 -->
             <rect x="155" y="95" width="70" height="38" rx="5" fill="#ec4899" opacity=".15"/>
             <rect x="155" y="95" width="70" height="38" rx="5" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="4,2"/>
             <rect x="163" y="103" width="54" height="22" rx="3" fill="#ec4899" opacity=".2"/>
-            <!-- Car 3 -->
             <rect x="270" y="100" width="75" height="36" rx="5" fill="#6366f1" opacity=".15"/>
             <rect x="270" y="100" width="75" height="36" rx="5" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
             <rect x="278" y="108" width="59" height="20" rx="3" fill="#6366f1" opacity=".25"/>
-            <!-- Plate recognition label -->
             <rect x="40" y="136" width="65" height="14" rx="3" fill="#22d3ee" opacity=".9"/>
             <text x="72" y="147" text-anchor="middle" font-size="8" fill="#000" font-family="monospace" font-weight="bold">TN 38 BX 1234</text>
             <rect x="155" y="134" width="70" height="14" rx="3" fill="#ec4899" opacity=".9"/>
             <text x="190" y="145" text-anchor="middle" font-size="8" fill="#fff" font-family="monospace" font-weight="bold">KA 05 MN 7890</text>
-            <!-- HUD panel -->
             <rect x="4" y="4" width="140" height="70" rx="6" fill="rgba(0,20,0,.75)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".5"/>
             <text x="12" y="18" font-size="8" fill="#22d3ee" font-family="monospace">TRAFFIC MONITOR v2.0</text>
             <text x="12" y="30" font-size="7" fill="#8f8" font-family="monospace">● VEHICLES DETECTED: 3</text>
             <text x="12" y="42" font-size="7" fill="#8f8" font-family="monospace">● PLATES SCANNED: 2/3</text>
             <text x="12" y="54" font-size="7" fill="#fa0" font-family="monospace">⚠ SPEED: 62 km/h</text>
             <text x="12" y="66" font-size="7" fill="#8f8" font-family="monospace">● YOLOv9 | OCR ACTIVE</text>
-            <!-- Camera icon top-right -->
             <rect x="358" y="5" width="36" height="26" rx="4" fill="rgba(99,102,241,.3)" stroke="#6366f1" stroke-width="1"/>
             <circle cx="376" cy="18" r="7" fill="none" stroke="#6366f1" stroke-width="1.5"/>
             <circle cx="376" cy="18" r="3" fill="#6366f1" opacity=".7"/>
@@ -1002,16 +562,20 @@
           <h3 class="project-title">Intelligent Traffic Monitoring System</h3>
           <p class="project-description">Automated traffic analysis system with vehicle detection and number plate recognition using YOLOv9 and OCR techniques for real-time monitoring.</p>
           <div class="project-tags">
-            <span class="project-tag">Python</span><span class="project-tag">OpenCV</span><span class="project-tag">YOLOv9</span><span class="project-tag">OCR</span><span class="project-tag">AI/ML</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">OpenCV</span>
+            <span class="project-tag">YOLOv9</span>
+            <span class="project-tag">OCR</span>
+            <span class="project-tag">AI/ML</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
         </div>
       </div>
 
-      <!-- Project 4: Lala Halwa House Bakery -->
+      <!-- Project 4 — Lala Halwa House Bakery UI -->
       <div class="project-card">
-        <div class="project-image proj-bg-4">
-          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="pg4warm" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#2a1000"/>
@@ -1023,32 +587,24 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="200" fill="url(#pg4warm)"/>
-            <!-- Header bar -->
             <rect x="0" y="0" width="400" height="36" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
-            <!-- Logo area -->
             <rect x="12" y="8" width="20" height="20" rx="4" fill="url(#pg4gold)"/>
             <text x="40" y="22" font-size="11" fill="#f59e0b" font-family="serif" font-weight="bold">Lala Halwa House</text>
             <text x="168" y="22" font-size="8" fill="rgba(245,158,11,.6)" font-family="sans-serif">🍰 Artisan Bakery</text>
             <rect x="316" y="10" width="72" height="16" rx="4" fill="url(#pg4gold)"/>
             <text x="352" y="22" text-anchor="middle" font-size="8" fill="#000" font-family="sans-serif" font-weight="bold">Order Now</text>
-            <!-- Hero banner area -->
             <rect x="0" y="36" width="400" height="70" fill="rgba(245,158,11,.06)"/>
-            <!-- Decorative circles -->
             <circle cx="330" cy="71" r="45" fill="rgba(245,158,11,.08)"/>
             <circle cx="330" cy="71" r="35" fill="rgba(245,158,11,.07)"/>
-            <!-- Pastry icon -->
             <ellipse cx="330" cy="75" rx="30" ry="14" fill="rgba(245,158,11,.25)" stroke="#f59e0b" stroke-width="1" stroke-opacity=".5"/>
             <ellipse cx="330" cy="68" rx="22" ry="10" fill="rgba(236,72,153,.2)" stroke="#ec4899" stroke-width="1" stroke-opacity=".4"/>
             <ellipse cx="330" cy="62" rx="14" ry="6" fill="rgba(245,158,11,.3)"/>
             <text x="330" y="65" text-anchor="middle" font-size="14">🎂</text>
-            <!-- Hero text -->
             <rect x="14" y="46" width="120" height="14" rx="3" fill="#f59e0b" opacity=".8"/>
             <rect x="14" y="66" width="90" height="8" rx="3" fill="#fff" opacity=".35"/>
             <rect x="14" y="80" width="65" height="8" rx="3" fill="#fff" opacity=".25"/>
             <rect x="14" y="94" width="55" height="14" rx="4" fill="url(#pg4gold)"/>
-            <!-- Products grid -->
             <rect x="0" y="106" width="400" height="94" fill="rgba(0,0,0,.3)"/>
-            <!-- product cards -->
             <rect x="10" y="114" width="85" height="78" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
             <text x="52" y="150" text-anchor="middle" font-size="26">🥐</text>
             <rect x="16" y="162" width="55" height="6" rx="2" fill="#fff" opacity=".4"/>
@@ -1065,7 +621,6 @@
             <text x="343" y="150" text-anchor="middle" font-size="26">🍪</text>
             <rect x="301" y="162" width="60" height="6" rx="2" fill="#fff" opacity=".4"/>
             <rect x="301" y="173" width="42" height="6" rx="2" fill="#6366f1" opacity=".7"/>
-            <!-- Figma badge -->
             <rect x="290" y="4" width="52" height="16" rx="4" fill="rgba(99,102,241,.4)" stroke="#6366f1" stroke-width="1"/>
             <text x="316" y="15" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">Figma UI</text>
           </svg>
@@ -1075,16 +630,19 @@
           <h3 class="project-title">Lala Halwa House — Bakery UI</h3>
           <p class="project-description">Designed a warm, inviting e-commerce UI for a traditional bakery shop. Warm color palette, product showcase layouts, and smooth navigation crafted in Figma.</p>
           <div class="project-tags">
-            <span class="project-tag">Figma</span><span class="project-tag">UI/UX</span><span class="project-tag">Bakery</span><span class="project-tag">E-Commerce</span>
+            <span class="project-tag">Figma</span>
+            <span class="project-tag">UI/UX</span>
+            <span class="project-tag">Bakery</span>
+            <span class="project-tag">E-Commerce</span>
           </div>
-          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House" target="_blank" rel="noopener" class="project-link">View Design →</a>
+          <a href="https://www.figma.com/design/4Fc2xrkMpq5wShBkUTQ89A/Lala-Halwa-House" target="_blank" rel="noopener noreferrer" class="project-link">View Design →</a>
         </div>
       </div>
 
-      <!-- Project 5: AL IHSAN Corporate -->
+      <!-- Project 5 — AL IHSAN Corporate Profile -->
       <div class="project-card">
-        <div class="project-image proj-bg-5">
-          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="pg5bg" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#0a0f1a"/>
@@ -1096,53 +654,37 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="200" fill="url(#pg5bg)"/>
-            <!-- Corporate brochure pages effect -->
-            <!-- Page 1 (back) -->
             <rect x="20" y="20" width="160" height="162" rx="4" fill="#12192a" stroke="rgba(34,211,238,.2)" stroke-width="1" transform="rotate(-3 100 101)"/>
-            <!-- Page 2 (middle) -->
             <rect x="30" y="18" width="160" height="164" rx="4" fill="#141d2e" stroke="rgba(34,211,238,.25)" stroke-width="1" transform="rotate(-1 110 100)"/>
-            <!-- Page 3 (front) -->
             <rect x="40" y="16" width="160" height="168" rx="4" fill="#161f32" stroke="rgba(34,211,238,.3)" stroke-width="1"/>
-            <!-- Brochure cover content -->
-            <!-- Header bar -->
             <rect x="40" y="16" width="160" height="28" rx="4" fill="url(#pg5blue)" opacity=".85"/>
             <text x="120" y="33" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif" font-weight="bold">AL IHSAN DEVELOPMENT</text>
-            <!-- Logo placeholder -->
             <rect x="48" y="52" width="36" height="36" rx="6" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="1"/>
             <text x="66" y="74" text-anchor="middle" font-size="16">🏢</text>
-            <!-- Headline text bars -->
             <rect x="90" y="54" width="100" height="8" rx="2" fill="#22d3ee" opacity=".7"/>
             <rect x="90" y="68" width="80" height="5" rx="2" fill="#fff" opacity=".3"/>
             <rect x="90" y="79" width="70" height="5" rx="2" fill="#fff" opacity=".2"/>
-            <!-- Divider -->
             <rect x="48" y="96" width="144" height="1" fill="url(#pg5blue)" opacity=".5"/>
-            <!-- Body text blocks -->
             <rect x="48" y="104" width="144" height="5" rx="2" fill="#fff" opacity=".15"/>
             <rect x="48" y="114" width="130" height="5" rx="2" fill="#fff" opacity=".12"/>
             <rect x="48" y="124" width="140" height="5" rx="2" fill="#fff" opacity=".1"/>
             <rect x="48" y="134" width="120" height="5" rx="2" fill="#fff" opacity=".12"/>
-            <!-- Stats row -->
             <rect x="48" y="148" width="40" height="24" rx="4" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".4"/>
             <text x="68" y="163" text-anchor="middle" font-size="10" fill="#22d3ee" font-family="sans-serif" font-weight="bold">15+</text>
             <rect x="94" y="148" width="40" height="24" rx="4" fill="rgba(99,102,241,.1)" stroke="#6366f1" stroke-width="1" stroke-opacity=".4"/>
             <text x="114" y="163" text-anchor="middle" font-size="10" fill="#6366f1" font-family="sans-serif" font-weight="bold">8K+</text>
             <rect x="140" y="148" width="40" height="24" rx="4" fill="rgba(245,158,11,.1)" stroke="#f59e0b" stroke-width="1" stroke-opacity=".4"/>
             <text x="160" y="163" text-anchor="middle" font-size="10" fill="#f59e0b" font-family="sans-serif" font-weight="bold">10yr</text>
-            <!-- Page number -->
             <text x="190" y="180" text-anchor="end" font-size="7" fill="rgba(255,255,255,.25)" font-family="sans-serif">01 / 10</text>
-            <!-- Tool badge -->
             <rect x="220" y="20" width="170" height="160" rx="6" fill="rgba(255,255,255,.02)"/>
-            <!-- Canva label -->
             <rect x="240" y="30" width="60" height="18" rx="4" fill="rgba(245,158,11,.3)" stroke="#f59e0b" stroke-width="1"/>
             <text x="270" y="42" text-anchor="middle" font-size="8" fill="#f59e0b" font-family="sans-serif" font-weight="bold">Canva</text>
-            <!-- 10 pages stacked -->
             <text x="280" y="75" text-anchor="middle" font-size="30" opacity=".6">📄</text>
             <text x="290" y="95" text-anchor="middle" font-size="10" fill="#fff" opacity=".4" font-family="sans-serif">10-Page Profile</text>
             <rect x="230" y="110" width="150" height="5" rx="2" fill="#fff" opacity=".08"/>
             <rect x="230" y="121" width="130" height="5" rx="2" fill="#fff" opacity=".06"/>
             <rect x="230" y="132" width="140" height="5" rx="2" fill="#fff" opacity=".06"/>
             <rect x="230" y="143" width="100" height="5" rx="2" fill="#fff" opacity=".05"/>
-            <!-- Download PDF button -->
             <rect x="230" y="160" width="150" height="14" rx="4" fill="url(#pg5blue)" opacity=".7"/>
             <text x="305" y="170" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">Download Corporate PDF</text>
           </svg>
@@ -1152,26 +694,30 @@
           <h3 class="project-title">AL IHSAN Corporate Profile</h3>
           <p class="project-description">Designed a 10-page corporate company profile with professional typography, branding elements, and structured layouts delivered as a client-ready PDF brochure.</p>
           <div class="project-tags">
-            <span class="project-tag">Canva</span><span class="project-tag">Graphic Design</span><span class="project-tag">Branding</span><span class="project-tag">PDF</span>
+            <span class="project-tag">Canva</span>
+            <span class="project-tag">Graphic Design</span>
+            <span class="project-tag">Branding</span>
+            <span class="project-tag">PDF</span>
           </div>
-          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" rel="noopener" class="project-link">View Project →</a>
+          <a href="https://varshini3123.github.io/al-ihsan-ui-design/AL_IHSAN_Company_Profile.pdf" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ======= DESIGN WORKS SECTION ======= -->
+  <!-- =====================================================
+       DESIGN WORKS SECTION
+       ===================================================== -->
   <section id="designs">
-    <div class="section-tag">✦ Creative Work</div>
-    <h2 class="section-title reveal">Design <span>Works</span></h2>
-    <div class="section-divider"></div>
+    <h2 class="section-title reveal">Design Works</h2>
+
     <div class="design-grid">
 
-      <!-- Design 1: Magazine -->
+      <!-- Design 1 — Department Magazine -->
       <div class="design-card">
-        <div class="design-preview design-bg-1">
-          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="design-preview">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="dg1" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#6366f1" stop-opacity=".8"/>
@@ -1179,23 +725,18 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="190" fill="#0e0a1e"/>
-            <!-- Magazine cover -->
             <rect x="30" y="10" width="155" height="170" rx="4" fill="#16103a" stroke="rgba(99,102,241,.4)" stroke-width="1.5"/>
             <rect x="30" y="10" width="155" height="45" rx="4" fill="url(#dg1)"/>
             <text x="107" y="28" text-anchor="middle" font-size="9" fill="#fff" font-family="serif" font-weight="bold">DEPARTMENT MAGAZINE</text>
             <text x="107" y="42" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.7)" font-family="sans-serif">CS &amp; Business Systems • Vol. 1</text>
-            <!-- Cover image placeholder -->
             <rect x="38" y="63" width="139" height="72" rx="3" fill="rgba(99,102,241,.15)"/>
             <circle cx="107" cy="99" r="28" fill="rgba(236,72,153,.2)" stroke="#ec4899" stroke-width="1" stroke-opacity=".5"/>
             <text x="107" y="104" text-anchor="middle" font-size="22">📚</text>
-            <!-- Cover text -->
             <rect x="38" y="143" width="90" height="6" rx="2" fill="#fff" opacity=".5"/>
             <rect x="38" y="154" width="70" height="5" rx="2" fill="#fff" opacity=".3"/>
             <rect x="38" y="164" width="80" height="5" rx="2" fill="#fff" opacity=".25"/>
-            <!-- Page number chip -->
             <rect x="152" y="165" width="25" height="12" rx="3" fill="url(#dg1)"/>
             <text x="164" y="174" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">100</text>
-            <!-- Inner pages -->
             <rect x="210" y="18" width="90" height="70" rx="3" fill="#16103a" stroke="rgba(99,102,241,.2)" stroke-width="1"/>
             <rect x="216" y="24" width="78" height="4" rx="2" fill="url(#dg1)" opacity=".8"/>
             <rect x="216" y="33" width="78" height="3" rx="1" fill="#fff" opacity=".12"/>
@@ -1221,23 +762,25 @@
             <rect x="316" y="155" width="64" height="8" rx="2" fill="url(#dg1)" opacity=".6"/>
           </svg>
           <div class="design-image-overlay">
-            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Design ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="view-btn">View Design ↗</a>
           </div>
         </div>
         <div class="design-content">
           <h3 class="design-title">Department Magazine — 100 Pages</h3>
-          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Led end-to-end planning and design of a 100-page departmental magazine, managing the entire workflow from concept to final publication.</p>
+          <p class="project-description">Led end-to-end planning and design of a 100-page departmental magazine, managing the entire workflow from concept to final publication.</p>
           <div class="design-tools">
-            <span class="design-tool">Canva</span><span class="design-tool">Adobe Photoshop</span><span class="design-tool">Layout Design</span>
+            <span class="design-tool">Canva</span>
+            <span class="design-tool">Adobe Photoshop</span>
+            <span class="design-tool">Layout Design</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Design →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="project-link">View Design →</a>
         </div>
       </div>
 
-      <!-- Design 2: Event Posters -->
+      <!-- Design 2 — Event Posters -->
       <div class="design-card">
-        <div class="design-preview design-bg-2">
-          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="design-preview">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="dg2a" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#f59e0b"/>
@@ -1249,20 +792,18 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="190" fill="#0a0f0a"/>
-            <!-- Poster 1 (technical event) -->
-            <rect x="14" y="12" width="110" height="166" rx="6" fill="#12200a" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
-            <rect x="14" y="12" width="110" height="40" rx="6" fill="url(#dg2b)"/>
-            <text x="69" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">TECHFEST 2K24</text>
-            <text x="69" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">Dept. of CS&amp;BS</text>
+            <rect x="14"  y="12" width="110" height="166" rx="6" fill="#12200a" stroke="rgba(34,211,238,.4)"  stroke-width="1.5"/>
+            <rect x="14"  y="12" width="110" height="40"  rx="6" fill="url(#dg2b)"/>
+            <text x="69"  y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">TECHFEST 2K24</text>
+            <text x="69"  y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">Dept. of CS&amp;BS</text>
             <circle cx="69" cy="90" r="36" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
             <text x="69" y="98" text-anchor="middle" font-size="30">💻</text>
             <rect x="22" y="138" width="94" height="5" rx="2" fill="#22d3ee" opacity=".5"/>
             <rect x="22" y="148" width="70" height="4" rx="2" fill="#fff" opacity=".25"/>
             <rect x="22" y="157" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
             <rect x="32" y="168" width="74" height="8" rx="3" fill="url(#dg2b)" opacity=".8"/>
-            <!-- Poster 2 (cultural event) -->
-            <rect x="140" y="12" width="110" height="166" rx="6" fill="#200a12" stroke="rgba(236,72,153,.4)" stroke-width="1.5"/>
-            <rect x="140" y="12" width="110" height="40" rx="6" fill="url(#dg2a)"/>
+            <rect x="140" y="12" width="110" height="166" rx="6" fill="#200a12" stroke="rgba(236,72,153,.4)"  stroke-width="1.5"/>
+            <rect x="140" y="12" width="110" height="40"  rx="6" fill="url(#dg2a)"/>
             <text x="195" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">CULTURALS 2K24</text>
             <text x="195" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">Annual Event</text>
             <circle cx="195" cy="90" r="36" fill="rgba(236,72,153,.08)" stroke="#ec4899" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
@@ -1271,36 +812,37 @@
             <rect x="148" y="148" width="70" height="4" rx="2" fill="#fff" opacity=".25"/>
             <rect x="148" y="157" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
             <rect x="158" y="168" width="74" height="8" rx="3" fill="url(#dg2a)" opacity=".8"/>
-            <!-- Poster 3 (workshop) -->
-            <rect x="266" y="12" width="120" height="166" rx="6" fill="#0a1220" stroke="rgba(99,102,241,.4)" stroke-width="1.5"/>
-            <rect x="266" y="12" width="120" height="40" rx="6" fill="#6366f1" opacity=".8"/>
+            <rect x="266" y="12" width="120" height="166" rx="6" fill="#0a1220" stroke="rgba(99,102,241,.4)"  stroke-width="1.5"/>
+            <rect x="266" y="12" width="120" height="40"  rx="6" fill="#6366f1" opacity=".8"/>
             <text x="326" y="28" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="bold">WORKSHOP 2K24</text>
             <text x="326" y="40" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.7)" font-family="sans-serif">UI/UX Design</text>
             <circle cx="326" cy="90" r="36" fill="rgba(99,102,241,.08)" stroke="#6366f1" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4,3"/>
             <text x="326" y="98" text-anchor="middle" font-size="30">🎨</text>
             <rect x="274" y="138" width="104" height="5" rx="2" fill="#6366f1" opacity=".5"/>
-            <rect x="274" y="148" width="80" height="4" rx="2" fill="#fff" opacity=".25"/>
-            <rect x="274" y="157" width="90" height="4" rx="2" fill="#fff" opacity=".2"/>
-            <rect x="284" y="168" width="84" height="8" rx="3" fill="#6366f1" opacity=".8"/>
+            <rect x="274" y="148" width="80"  height="4" rx="2" fill="#fff" opacity=".25"/>
+            <rect x="274" y="157" width="90"  height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="284" y="168" width="84"  height="8" rx="3" fill="#6366f1" opacity=".8"/>
           </svg>
           <div class="design-image-overlay">
-            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Designs ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="view-btn">View Designs ↗</a>
           </div>
         </div>
         <div class="design-content">
           <h3 class="design-title">Event Poster Designs</h3>
-          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Creative and visually engaging posters for departmental technical and non-technical events, applying typography hierarchy and color theory principles.</p>
+          <p class="project-description">Creative and visually engaging posters for departmental technical and non-technical events, applying typography hierarchy and color theory principles.</p>
           <div class="design-tools">
-            <span class="design-tool">Canva</span><span class="design-tool">Figma</span><span class="design-tool">Adobe Photoshop</span>
+            <span class="design-tool">Canva</span>
+            <span class="design-tool">Figma</span>
+            <span class="design-tool">Adobe Photoshop</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Designs →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="project-link">View Designs →</a>
         </div>
       </div>
 
-      <!-- Design 3: Activity Posters -->
+      <!-- Design 3 — Activity Posters & Branding -->
       <div class="design-card">
-        <div class="design-preview design-bg-3">
-          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <div class="design-preview">
+          <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" aria-hidden="true">
             <defs>
               <linearGradient id="dg3" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#6366f1"/>
@@ -1308,31 +850,24 @@
               </linearGradient>
             </defs>
             <rect x="0" y="0" width="400" height="190" fill="#080f12"/>
-            <!-- Branding system mockup -->
-            <!-- Logo card -->
             <rect x="10" y="10" width="175" height="80" rx="6" fill="#0f1820" stroke="rgba(34,211,238,.3)" stroke-width="1"/>
             <text x="97" y="35" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="sans-serif" font-weight="bold">DEPT. IDENTITY SYSTEM</text>
-            <!-- Logo mark -->
             <rect x="26" y="44" width="40" height="40" rx="6" fill="url(#dg3)" opacity=".8"/>
             <text x="46" y="68" text-anchor="middle" font-size="18" fill="#fff">CS</text>
-            <!-- Color palette -->
-            <circle cx="88" cy="52" r="10" fill="#6366f1"/>
+            <circle cx="88"  cy="52" r="10" fill="#6366f1"/>
             <circle cx="108" cy="52" r="10" fill="#ec4899"/>
             <circle cx="128" cy="52" r="10" fill="#22d3ee"/>
             <circle cx="148" cy="52" r="10" fill="#f59e0b"/>
             <rect x="78" y="68" width="80" height="4" rx="2" fill="#fff" opacity=".2"/>
             <rect x="78" y="76" width="60" height="4" rx="2" fill="#fff" opacity=".15"/>
-            <!-- Social media post mockup -->
-            <rect x="10" y="100" width="85" height="80" rx="6" fill="#0f1820" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
-            <!-- phone frame -->
-            <rect x="16" y="106" width="73" height="68" rx="4" fill="#0a0f18"/>
-            <rect x="22" y="112" width="61" height="56" rx="3" fill="#12182a"/>
-            <rect x="22" y="112" width="61" height="22" rx="3" fill="url(#dg3)" opacity=".7"/>
-            <text x="52" y="127" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">Activity Post</text>
-            <rect x="26" y="138" width="53" height="4" rx="2" fill="#fff" opacity=".2"/>
-            <rect x="26" y="146" width="40" height="4" rx="2" fill="#fff" opacity=".15"/>
-            <rect x="26" y="155" width="20" height="9" rx="2" fill="#ec4899" opacity=".8"/>
-            <!-- Typography poster -->
+            <rect x="10"  y="100" width="85" height="80" rx="6" fill="#0f1820" stroke="rgba(99,102,241,.3)"  stroke-width="1"/>
+            <rect x="16"  y="106" width="73" height="68" rx="4" fill="#0a0f18"/>
+            <rect x="22"  y="112" width="61" height="56" rx="3" fill="#12182a"/>
+            <rect x="22"  y="112" width="61" height="22" rx="3" fill="url(#dg3)" opacity=".7"/>
+            <text x="52"  y="127" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">Activity Post</text>
+            <rect x="26"  y="138" width="53" height="4" rx="2" fill="#fff" opacity=".2"/>
+            <rect x="26"  y="146" width="40" height="4" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="26"  y="155" width="20" height="9" rx="2" fill="#ec4899" opacity=".8"/>
             <rect x="105" y="100" width="80" height="80" rx="6" fill="#0f1820" stroke="rgba(236,72,153,.3)" stroke-width="1"/>
             <rect x="111" y="106" width="68" height="20" rx="3" fill="rgba(236,72,153,.2)"/>
             <text x="145" y="119" text-anchor="middle" font-size="8" fill="#ec4899" font-family="sans-serif" font-weight="bold">TYPOGRAPHY</text>
@@ -1340,9 +875,7 @@
             <rect x="111" y="143" width="55" height="4" rx="2" fill="#fff" opacity=".12"/>
             <rect x="111" y="152" width="60" height="4" rx="2" fill="#fff" opacity=".1"/>
             <rect x="111" y="161" width="40" height="10" rx="3" fill="url(#dg3)" opacity=".7"/>
-            <!-- Illustration mockup -->
-            <rect x="200" y="10" width="190" height="170" rx="6" fill="#0f1820" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
-            <!-- Visual branding mockup - Instagram grid style -->
+            <rect x="200" y="10"  width="190" height="170" rx="6" fill="#0f1820" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
             <text x="295" y="30" text-anchor="middle" font-size="9" fill="#f59e0b" font-family="sans-serif" font-weight="bold">VISUAL BRAND SYSTEM</text>
             <rect x="208" y="38" width="58" height="58" rx="4" fill="url(#dg3)" opacity=".5"/>
             <text x="237" y="71" text-anchor="middle" font-size="22">🎯</text>
@@ -1361,46 +894,74 @@
             <text x="305" y="159" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">View All</text>
           </svg>
           <div class="design-image-overlay">
-            <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="view-btn">View Designs ↗</a>
+            <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="view-btn">View Designs ↗</a>
           </div>
         </div>
         <div class="design-content">
           <h3 class="design-title">Departmental Activity Posters &amp; Branding</h3>
-          <p class="project-description" style="font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.85rem;">Designed posters and visual creatives for departmental activities, ensuring consistent branding and visual appeal across all materials.</p>
+          <p class="project-description">Designed posters and visual creatives for departmental activities, ensuring consistent branding and visual appeal across all materials.</p>
           <div class="design-tools">
-            <span class="design-tool">Figma</span><span class="design-tool">Visual Communication</span><span class="design-tool">Branding</span>
+            <span class="design-tool">Figma</span>
+            <span class="design-tool">Visual Communication</span>
+            <span class="design-tool">Branding</span>
           </div>
-          <a href="https://github.com/varshini3123" target="_blank" rel="noopener" class="project-link">View Designs →</a>
+          <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="project-link">View Designs →</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ======= EDUCATION SECTION ======= -->
+  <!-- =====================================================
+       EDUCATION SECTION
+       ===================================================== -->
   <section id="education">
     <h2 class="section-title reveal">Education</h2>
+
     <div class="education-grid">
       <div class="education-card">
         <h3 class="education-degree">B.Tech – Computer Science and Business Systems</h3>
         <p class="education-institution">Ramco Institute of Technology, Rajapalayam</p>
         <p class="education-year">2022 – 2026</p>
-        <div class="education-score"><span>📊</span><span>CGPA: 7.61</span></div>
+        <div class="education-score">
+          <span>📊</span>
+          <span>CGPA: 7.61</span>
+        </div>
       </div>
     </div>
 
+    <!-- Soft Skills -->
     <div class="languages-container" style="margin-top: 3rem;">
       <h3 class="languages-title">Soft Skills</h3>
       <div class="soft-skills-grid">
-        <div class="soft-skill-card"><div class="soft-skill-icon">🧩</div><p class="soft-skill-name">Problem Solving</p></div>
-        <div class="soft-skill-card"><div class="soft-skill-icon">💡</div><p class="soft-skill-name">Creativity & Design Thinking</p></div>
-        <div class="soft-skill-card"><div class="soft-skill-icon">🤝</div><p class="soft-skill-name">Team Collaboration</p></div>
-        <div class="soft-skill-card"><div class="soft-skill-icon">💬</div><p class="soft-skill-name">Communication Skills</p></div>
-        <div class="soft-skill-card"><div class="soft-skill-icon">⏰</div><p class="soft-skill-name">Time Management</p></div>
-        <div class="soft-skill-card"><div class="soft-skill-icon">🔍</div><p class="soft-skill-name">Attention to Detail</p></div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">🧩</div>
+          <p class="soft-skill-name">Problem Solving</p>
+        </div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">💡</div>
+          <p class="soft-skill-name">Creativity &amp; Design Thinking</p>
+        </div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">🤝</div>
+          <p class="soft-skill-name">Team Collaboration</p>
+        </div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">💬</div>
+          <p class="soft-skill-name">Communication Skills</p>
+        </div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">⏰</div>
+          <p class="soft-skill-name">Time Management</p>
+        </div>
+        <div class="soft-skill-card">
+          <div class="soft-skill-icon">🔍</div>
+          <p class="soft-skill-name">Attention to Detail</p>
+        </div>
       </div>
     </div>
 
+    <!-- Languages -->
     <div class="languages-container">
       <h3 class="languages-title">Languages</h3>
       <div class="language-badges">
@@ -1410,9 +971,12 @@
     </div>
   </section>
 
-  <!-- ======= ACHIEVEMENTS SECTION ======= -->
+  <!-- =====================================================
+       ACHIEVEMENTS SECTION
+       ===================================================== -->
   <section id="achievements">
     <h2 class="section-title reveal">Achievements</h2>
+
     <div class="achievements-grid">
       <div class="achievement-card">
         <div class="achievement-icon">🥈</div>
@@ -1435,177 +999,80 @@
     </div>
   </section>
 
-  <!-- ======= CONTACT SECTION ======= -->
+  <!-- =====================================================
+       CONTACT SECTION
+       ===================================================== -->
   <section id="contact">
     <h2 class="section-title reveal">Get In Touch</h2>
+
     <div class="contact-grid">
       <div class="contact-cards">
         <a href="mailto:pvarshini3123@gmail.com" class="contact-card">
           <div class="contact-icon">📧</div>
-          <div class="contact-info"><h4>Email</h4><span>pvarshini3123@gmail.com</span></div>
+          <div class="contact-info">
+            <h4>Email</h4>
+            <span>pvarshini3123@gmail.com</span>
+          </div>
         </a>
         <a href="tel:+916382789548" class="contact-card">
           <div class="contact-icon">📱</div>
-          <div class="contact-info"><h4>Phone</h4><span>+91 6382789548</span></div>
+          <div class="contact-info">
+            <h4>Phone</h4>
+            <span>+91 6382789548</span>
+          </div>
         </a>
         <div class="contact-card">
           <div class="contact-icon">📍</div>
-          <div class="contact-info"><h4>Location</h4><span>Cholapuram, Virudhunagar 626139</span></div>
+          <div class="contact-info">
+            <h4>Location</h4>
+            <span>Cholapuram, Virudhunagar 626139</span>
+          </div>
         </div>
-        <a href="https://www.linkedin.com/in/varshini-p-8a4418255" target="_blank" class="contact-card">
+        <a href="https://www.linkedin.com/in/varshini-p-8a4418255" target="_blank" rel="noopener noreferrer" class="contact-card">
           <div class="contact-icon">💼</div>
-          <div class="contact-info"><h4>LinkedIn</h4><span>varshini-p-8a4418255</span></div>
+          <div class="contact-info">
+            <h4>LinkedIn</h4>
+            <span>varshini-p-8a4418255</span>
+          </div>
         </a>
-        <a href="https://github.com/varshini3123" target="_blank" class="contact-card">
+        <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer" class="contact-card">
           <div class="contact-icon">💻</div>
-          <div class="contact-info"><h4>GitHub</h4><span>varshini3123</span></div>
+          <div class="contact-info">
+            <h4>GitHub</h4>
+            <span>varshini3123</span>
+          </div>
         </a>
         <div class="contact-card">
           <div class="contact-icon">✅</div>
-          <div class="contact-info"><h4>Availability</h4><span>Open for Opportunities</span></div>
+          <div class="contact-info">
+            <h4>Availability</h4>
+            <span>Open for Opportunities</span>
+          </div>
         </div>
       </div>
+
       <div class="contact-avatar-wrapper">
-        <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
         <div class="contact-avatar">VP</div>
       </div>
     </div>
   </section>
 
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
   <footer>
-    <p>© 2024 Varshini P. Designed & Built with ❤️</p>
+    <p>© 2024 Varshini P. Designed &amp; Built with ❤️</p>
     <p style="margin-top: 0.5rem;">
       <a href="https://github.com/varshini3123" target="_blank" rel="noopener noreferrer">GitHub</a> •
       <a href="https://www.linkedin.com/in/varshini-p-8a4418255" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </p>
   </footer>
 
-  <script>
-    // Loader
-    window.addEventListener('load', () => {
-      setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2000);
-    });
+  <!-- JavaScript (deferred so DOM is ready) -->
+  <script src="script.js" defer></script>
 
-    // Custom Cursor
-    const cursorDot = document.getElementById('cursor-dot');
-    const cursorRing = document.getElementById('cursor-ring');
-    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
-    });
-
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.left = ringX + 'px';
-      cursorRing.style.top = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button, .project-card, .experience-card, .tech-chip, .design-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
-    });
-
-    // Mobile nav
-    const navToggle = document.getElementById('nav-toggle');
-    const navLinks = document.getElementById('nav-links');
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('active'));
-    });
-
-    // Particle Canvas
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const colors = ['#6366f1', '#ec4899', '#22d3ee', '#f59e0b'];
-
-    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-      update() {
-        this.x += this.speedX; this.y += this.speedY;
-        if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
-      }
-      draw() {
-        ctx.fillStyle = this.color; ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      const count = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
-      for (let i = 0; i < count; i++) particles.push(new Particle());
-    }
-    initParticles();
-
-    function connectParticles() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 150) {
-            ctx.strokeStyle = `rgba(99,102,241,${0.2 * (1 - d / 150)})`;
-            ctx.lineWidth = 1; ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      connectParticles();
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (entry.target.classList.contains('skill-item')) {
-            const val = entry.target.dataset.skill;
-            const fill = entry.target.querySelector('.skill-fill');
-            setTimeout(() => { fill.style.width = val + '%'; }, 200);
-          }
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll(
-      '.reveal, .reveal-left, .reveal-right, .skill-item, .tech-chip, .timeline-item, .project-card, .design-card, .education-card, .language-badge, .achievement-card, .contact-card, .soft-skill-card'
-    ).forEach(el => observer.observe(el));
-
-    // Stagger delays
-    document.querySelectorAll('.tech-chip').forEach((el, i) => el.style.transitionDelay = `${i * 0.05}s`);
-    document.querySelectorAll('.timeline-item').forEach((el, i) => el.style.transitionDelay = `${i * 0.2}s`);
-    document.querySelectorAll('.project-card').forEach((el, i) => el.style.transitionDelay = `${i * 0.1}s`);
-    document.querySelectorAll('.design-card').forEach((el, i) => el.style.transitionDelay = `${i * 0.1}s`);
-    document.querySelectorAll('.contact-card').forEach((el, i) => el.style.transitionDelay = `${i * 0.1}s`);
-    document.querySelectorAll('.soft-skill-card').forEach((el, i) => el.style.transitionDelay = `${i * 0.1}s`);
-    document.querySelectorAll('.language-badge').forEach((el, i) => el.style.transitionDelay = `${i * 0.15}s`);
-    document.querySelectorAll('.achievement-card').forEach((el, i) => el.style.transitionDelay = `${i * 0.15}s`);
-  </script>
 </body>
 </html>
